@@ -5,7 +5,7 @@ export const getBilledCount = createAsyncThunk('billed/getConsumerArrears',
 	async (payload, {getState}) => {
         return await axios.get(`https://mr.bharatsmr.com/TSSPDCL/billedcount?eroCode=${payload.eroCode}&billDate=${payload.billDate}`, {
             headers: {
-                authkey:'9391962924',
+                authkey:localStorage.getItem('mobileNo'),
                 'Content-Type': 'application/json'
             }
         })

@@ -5,7 +5,7 @@ export const billDelete = createAsyncThunk('bill/billDelete',
 	async (payload, {getState}) => {
         return await axios.get(`https://mr.bharatsmr.com/TSSPDCL/delete/bill?uscNo=${payload.uscNo}&serviceNo=${payload.serviceNo}&meterNo=${payload.meterNo}`, {
             headers: {
-                authkey:'9391962924',
+                authkey:localStorage.getItem('mobileNo'),
                 'Content-Type': 'application/json'
             }
         })

@@ -5,11 +5,13 @@ export const uploadFile = createAsyncThunk('upload/uploadFile',
 	async (payload, {getState}) => {
         return await axios.get(`https://mr.bharatsmr.com/TSSPDCL/inputfiles/info?page=${payload.page}&eroCode=${payload.eroCode}`, {
             headers: {
-                authkey:'9391962924',
+                authkey:localStorage.getItem('mobileNo'),
                 'Content-Type': 'application/json'
             }
         })
         .then(res => {
+            console.log('res')
+            console.log(res)
             return{data:res.data}
         })
         .catch(err => {

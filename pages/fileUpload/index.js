@@ -45,17 +45,19 @@ const Index = () => {
         
 
 		fetch(
-			'http://192.168.0.101:5000/TSSPDCL/uploadinput',
+			'https://mr.bharatsmr.com/TSSPDCL/uploadinput',
 			{
 				method: 'POST',
 				body: formData,
                 headers: {
-                    authkey: '9391962924'
+                    authkey: localStorage.getItem('mobileNo')
                 }
 			}
 		)
 			.then((response) => response.json())
 			.then((result) => {
+              console.log('res')
+              console.log(result)
                 setSelectedFile(result)
                 dispatch(uploadFile(apiObject))
                 setShowMessage(true)

@@ -5,7 +5,7 @@ export const getBillStatus = createAsyncThunk('bil/getBillStat',
 	async (payload, {getState}) => {
         return await axios.get(`https://mr.bharatsmr.com/TSSPDCL/billstatus?uscNo=${payload.uscNo}&serviceNo=${payload.serviceNo}&meterNo=${payload.meterNo}`, {
             headers: {
-                authkey:'9391962924',
+                authkey:localStorage.getItem('mobileNo'),
                 'Content-Type': 'application/json'
             }
         })
