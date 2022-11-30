@@ -12,44 +12,42 @@ const Index = () => {
 
     let data = useSelector((state) => state.uploadData)
     const [selectedFile, setSelectedFile] = useState([]);
-	const [isFilePicked, setIsFilePicked] = useState(false);
-	const [eroCode, setEroCode] = useState('');
+	  const [isFilePicked, setIsFilePicked] = useState(false);
+	  const [eroCode, setEroCode] = useState('');
     const [files, setFiles] = useState('');
     const [showMessage, setShowMessage] = useState(false);
 
 
     const inputRef = useRef(null);
+
     const resetFileInput = () => {
-      // 👇️ reset input value
       inputRef.current.value = null;
     };
 
     
     let dispatch = useDispatch()
 
-    let apiObject = {eroCode:"022",page:0}
+    let apiObject = {eroCode:"",page:0}
 
     useEffect(() => {
       dispatch(uploadFile(apiObject))
-    }, [dispatch])
+    }, [])
 
 
 	const changeHandler = (event) => {
         setFiles(event.target.files);
-		setIsFilePicked(true);
-        console.log(event.target.files)
+		    setIsFilePicked(true);
 	};
 
 
 	const handleSubmission = (e) => {
-        e.preventDefault();
+    
+    e.preventDefault();
 		const formData = new FormData();
 		formData.append('eroCode', eroCode);
-        for (let i = 0; i < files.length; i++) {
-            formData.append(`txtFile`, files[i])
-        }
-        
-
+    for (let i = 0; i < files.length; i++) {
+        formData.append(`txtFile`, files[i])
+    }
 		fetch(
 			'https://mr.bharatsmr.com/TSSPDCL/uploadinput',
 			{
@@ -60,23 +58,22 @@ const Index = () => {
                 }
 			}
 		)
-			.then((response) => response.json())
-			.then((result) => {
-                console.log('res')
-                console.log(result)
-                setFiles([])
-                setEroCode('')
-                resetFileInput()
-                setSelectedFile(result)
-                dispatch(uploadFile(apiObject))
-                setShowMessage(true)
-                setTimeout(() => {
-                    setShowMessage(false)
-                }, 9000)
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+      setShowMessage(true)
+      setTimeout(() => {
+          setShowMessage(false)
+      }, 9000)
+      setFiles([])
+      setEroCode('')
+      resetFileInput()
+      setSelectedFile(result)
+      dispatch(uploadFile(apiObject))
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 	};
 
   console.log(files)

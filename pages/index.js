@@ -15,14 +15,15 @@ const Index = () => {
     
     let dispatch = useDispatch()
 
-    let apiObject = {eroCode:"021",billDate:""}
+    let apiObject = {eroCode:"",billDate:""}
 
     useEffect(() => {
       dispatch(getBilledCount(apiObject))
     }, [dispatch])
-    
 
-    return (
+  console.log(data.data)
+    
+  return (
           <div>
             <Head>
               <title>Billed Count</title>
@@ -47,6 +48,7 @@ const Index = () => {
                       link={false}
                       filters={{}}
                       paginate={false}
+                      arrayData={['eroCode','billDate','meterReader','billCount']}
                     />
                 </div>
               </div>

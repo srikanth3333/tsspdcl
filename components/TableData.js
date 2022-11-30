@@ -12,7 +12,7 @@ import {billDelete} from "../redux/billDelete/billDeleteSlice";
 const Str = require('@supercharge/strings')
 
 
-function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeItems,deleteOption}) {
+function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeItems,deleteOption,arrayData}) {
 
   let filtersData = useSelector((state) => state.users)
   let dispatch = useDispatch()
@@ -50,7 +50,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
   let mapData = objectData != null ? Object.keys(objectData) : null;
   let filteredArray = excludeItems != undefined ? mapData && mapData.filter(e => !excludeItems.includes(e)) : mapData;
 
-  let lp = filteredArray && filteredArray.map((item,i) => {
+  let lp = !arrayData ? filteredArray && filteredArray.map((item,i) => {
       return {
           title: `${Str(item).replaceAll('_', ' ').title().get()}`,
           dataIndex: `${item}`,
@@ -78,7 +78,35 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
             )
           }
       }
-  })
+    }) : arrayData.map((item,i) => {
+      return {
+          title: `${Str(item).replaceAll('_', ' ').title().get()}`,
+          dataIndex: `${item}`,
+          key: i,
+          width: 180,
+          textWrap: 'word-break',
+          ellipsis: true,
+          render: (val,record) => {
+            let ids = linkIndex && linkIndex.map((ddr) => ddr.index)
+            let final = linkIndex && linkIndex.reduce((acc,ddr) => {
+              return {...acc, [ddr.index]:{index:ddr.index,link:ddr.linkUrl,
+                linkExtend:ddr.linkExtend,noLink:ddr.noLink}}
+            },{})
+            
+            return(
+              <>
+                {
+                        link == true && ids.includes(i) ?
+                          <Link href={final[i]?.linkExtend == true ? `/${final[i]?.link}${record.id}` : final[i]?.noLink == true ? `${final[i]?.link}` : `${val}`}>
+                                {val}
+                          </Link>
+                         : val
+                }
+              </>
+            )
+          }
+      }
+    })
 
 
   // deleteOption ? lp?.push({
