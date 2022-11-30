@@ -61,6 +61,7 @@ const Index = () => {
     .then((response) => response.json())
     .then((result) => {
       console.log(result)
+      alert(`Successfully uploaded ${result.count} files.`)
       setShowMessage(true)
       setTimeout(() => {
           setShowMessage(false)
