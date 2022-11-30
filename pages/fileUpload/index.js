@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react';
+import {useEffect,useState,useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {uploadFile} from "../../redux/fileUpload/fileUploadSlice";
 import Link from 'next/link';
@@ -17,6 +17,12 @@ const Index = () => {
     const [files, setFiles] = useState('');
     const [showMessage, setShowMessage] = useState(false);
 
+
+    const inputRef = useRef(null);
+    const resetFileInput = () => {
+      // 👇️ reset input value
+      inputRef.current.value = null;
+    };
 
     
     let dispatch = useDispatch()
@@ -56,8 +62,11 @@ const Index = () => {
 		)
 			.then((response) => response.json())
 			.then((result) => {
-              console.log('res')
-              console.log(result)
+                console.log('res')
+                console.log(result)
+                setFiles([])
+                setEroCode('')
+                resetFileInput()
                 setSelectedFile(result)
                 dispatch(uploadFile(apiObject))
                 setShowMessage(true)
@@ -69,6 +78,10 @@ const Index = () => {
 				console.error('Error:', error);
 			});
 	};
+
+  console.log(files)
+
+  
     
 
     return (
@@ -85,11 +98,11 @@ const Index = () => {
                     <form className="row my-2" onSubmit={handleSubmission}>
                         <div className="col-lg-4">
                             <div>
-                                <input type="file" required className="form-control" multiple name="file" onChange={changeHandler} />
+                                <input type="file" ref={inputRef} required className="form-control" multiple name="file" onChange={changeHandler} />
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <input type="text" required placeholder="Enter ero code" className="form-control" onChange={(e) => setEroCode(e.target.value)} /> <br />
+                            <input type="text" required value={eroCode} placeholder="Enter ero code" className="form-control" onChange={(e) => setEroCode(e.target.value)} /> <br />
                         </div>
                         <div className="col-lg-4">
                             <button className="btn btn-primary" type="submit">Submit</button>
@@ -102,7 +115,7 @@ const Index = () => {
                       data={[
                         {label:"ERO Code",type:"text",value:"eroCode"},
                       ]} 
-                      title="Billed Count"
+                      title=""
                     />
                     <TableData
                       data={data} 

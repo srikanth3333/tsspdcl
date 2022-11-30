@@ -9,10 +9,12 @@ const Messages = ({messageText,type}) => {
     messageApi.open({
       type: type,
       content: messageText,
+      duration: 10,
     });
   };
 
   React.useEffect(() => {
+    
     return () => handleMessage();
   }, [])
 
