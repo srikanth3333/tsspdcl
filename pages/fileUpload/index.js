@@ -72,7 +72,7 @@ const Index = () => {
                 setShowMessage(true)
                 setTimeout(() => {
                     setShowMessage(false)
-                }, 2000)
+                }, 9000)
 			})
 			.catch((error) => {
 				console.error('Error:', error);
