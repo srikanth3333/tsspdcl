@@ -168,23 +168,23 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
     })
 
 
-  // deleteOption ? lp?.push({
-  //   title: `Delete`,
-  //   dataIndex: `Delete`,
-  //   key: 10,
-  //   width: 180,
-  //   textWrap: 'word-break',
-  //   ellipsis: true,
-  //   render: (val,record) => {
-  //     return(
-  //       <>
-  //         <form onSubmit={(e) => handleForm(e,record.uscNo,record.service_number,record.meter_number)}>
-  //           <button type="submit" className="btn btn-danger btn-sm">Delete</button>
-  //         </form>
-  //       </>
-  //     )
-  //   }
-  // }) : null
+  deleteOption ? lp?.push({
+    title: `Delete`,
+    dataIndex: `Delete`,
+    key: 10,
+    width: 180,
+    textWrap: 'word-break',
+    ellipsis: true,
+    render: (val,record) => {
+      return(
+        <>
+          <form onSubmit={(e) => handleForm(e,record.uscNo,record.service_number,record.meter_number)}>
+            <button type="submit" className="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </>
+      )
+    }
+  }) : null
 
   
 
