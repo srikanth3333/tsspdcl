@@ -35,12 +35,17 @@ const Index = () => {
 
 
 	const changeHandler = (event) => {
-        var allowedExtensions =/(\.txt)$/i;
-        if (!allowedExtensions.exec(filePath)) {
-          inputRef.current.value = null;
-          alert("Invalid file type .txt files are accepted")
-          return;
-        }
+        // var allowedExtensions =/(\.txt)$/i;
+        // let data = event.target.files.length
+        // for(let i=0; i < data; i++) {
+        //   if (!allowedExtensions.exec(data[i].name)) {
+        //     alert("Invalid file type .txt files are accepted")
+        //     inputRef.current.value = null;
+        //     return;
+        //   }
+        // }
+        
+
         setFiles(event.target.files);
 		    setIsFilePicked(true);
 	};
@@ -103,7 +108,7 @@ const Index = () => {
                     <form className="row my-2" onSubmit={handleSubmission}>
                         <div className="col-lg-4">
                             <div>
-                                <input type="file" ref={inputRef} required className="form-control" multiple name="file" onChange={changeHandler} />
+                                <input type="file" accept=".txt" ref={inputRef} required className="form-control" multiple name="file" onChange={changeHandler} />
                             </div>
                         </div>
                         <div className="col-lg-4">
