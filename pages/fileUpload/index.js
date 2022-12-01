@@ -130,8 +130,8 @@ const Index = () => {
                         {name:'filename',label:'File Name'},
                         {name:'s3Url',label:'URL'},
                         {name:'processedFlag',label:'Processed Flag'},
-                        {name:'insertedRows',label:'Inserted Rows'},
-                        {name:'exceptionRows',label:'Exception Rows'},
+                        {name:'insertedRows',label:'Inserted Records'},
+                        {name:'exceptionRows',label:'Exception Records'},
                         {name:'createdAt',label:'Created Date'},
                       ]}
                     />
