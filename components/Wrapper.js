@@ -98,8 +98,15 @@ const Wrapper = ({children}) => {
           <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={[selectedIndex]}
+            defaultSelectedKeys={selectedIndex}
           >
+            {
+              !collapsed ?
+              <div className="p-3">
+                <img src="./logo.png" style={{height:'40px'}} />
+              </div> : null
+            }
+            
             {
               items.map((item, index) => (
                 <Menu.Item key={index} onClick={() => {

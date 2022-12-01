@@ -30,6 +30,8 @@ export const getUser = createAsyncThunk('user/getUser',
 	async (payload, {dispatch}) => {
 		return await axios.get(`https://mr.bharatsmr.com/dashboard/usersList?mobileNo=${payload.mobileNo}`)
 		.then(res => {
+			console.log('res')
+			console.log(res)
 			let [user] = res.data
 			if(!user) {
 				alert("Not a registered User")

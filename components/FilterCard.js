@@ -24,6 +24,8 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
     dispatch(paginateApi(objectData))
   }
 
+  console.log(objArr)
+
   return (
     <>
         <div className="row align-items-center">
@@ -108,12 +110,17 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
                                     <label htmlFor="">{item.label}</label>
                                     <DatePicker  
                                         allowClear
-                                        value={objArr && objArr[item.value] !== "" ? moment(objArr && objArr[item.value]) : null}
+                                        value={objArr && objArr[item.value] != "" && objArr[item.value] != "Invalid date" ? moment(objArr && objArr[item.value]) : ""}
                                         format="DD-MM-YYYY" 
                                         style={{width:'100%'}} 
                                         onChange={(date,dateString) => {
                                             let finalDate = moment(date && date._d).format('YYYY-MM-DD')
-                                            return onChangeHandler(finalDate,item.value)
+                                            if(finalDate == "Invalid date") {
+                                                return onChangeHandler('',item.value)
+                                            }else {
+                                                return onChangeHandler(finalDate,item.value)
+                                            }
+                                            
                                         }} />
                                 </div>
                             </>

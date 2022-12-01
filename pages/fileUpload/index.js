@@ -50,6 +50,7 @@ const Index = () => {
     }
 		fetch(
 			'https://mr.bharatsmr.com/TSSPDCL/uploadinput',
+			// 'http://192.168.0.101:5000/TSSPDCL/uploadinput',
 			{
 				method: 'POST',
 				body: formData,
@@ -77,7 +78,7 @@ const Index = () => {
     });
 	};
 
-  console.log(files)
+  console.log(data.data)
 
   
     
@@ -114,16 +115,25 @@ const Index = () => {
                         {label:"ERO Code",type:"text",value:"eroCode"},
                       ]} 
                       title=""
+                      arrayData={['']}
                     />
                     <TableData
                       data={data} 
                       link={true}
                       linkIndex={[
-                        {index:2,linkUrl:""},
+                        {index:1,linkUrl:""},
                       ]}
                       deleteOption={true}
                       filters={{}}
                       paginate={false}
+                      arrayData={[
+                        {name:'filename',label:'File Name'},
+                        {name:'s3Url',label:'URL'},
+                        {name:'processedFlag',label:'Processed Flag'},
+                        {name:'insertedRows',label:'Inserted Rows'},
+                        {name:'exceptionRows',label:'Exception Rows'},
+                        {name:'createdAt',label:'Created Date'},
+                      ]}
                     />
                 </div>
               </div>

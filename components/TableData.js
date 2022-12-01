@@ -80,8 +80,8 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
       }
     }) : arrayData.map((item,i) => {
       return {
-          title: `${Str(item).replaceAll('_', ' ').title().get()}`,
-          dataIndex: `${item}`,
+          title: `${item.label}`,
+          dataIndex: `${item.name}`,
           key: i,
           width: 180,
           textWrap: 'word-break',

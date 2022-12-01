@@ -48,7 +48,12 @@ const Index = () => {
                       link={false}
                       filters={{}}
                       paginate={false}
-                      arrayData={['eroCode','billDate','meterReader','billCount']}
+                      arrayData={[
+                        {name:'eroCode',label:"Ero Code"},
+                        {name:'billDate',label:"Bill Date"},
+                        {name:'meterReader',label:"Meter Reader"},
+                        {name:'billCount',label:"Bill Count"},
+                      ]}
                     />
                 </div>
               </div>
