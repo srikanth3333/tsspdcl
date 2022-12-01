@@ -15,8 +15,12 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
   
   const onChangeHandler = (val,lop) => {
     setObjArr({...objArr, [lop]:val})
-    dispatch(paginateApi({...objArr, [lop]:val}))
-    dispatch(addFilters({"data":{...objArr, [lop]:val}}))
+    
+  }
+
+  const onSubmit = () => {
+    dispatch(paginateApi(objArr))
+    dispatch(addFilters(objArr))
   }
 
   const handleReset = () => {
@@ -130,9 +134,17 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
             }
             <div className="col-lg-3">
                 <label htmlFor="">&nbsp;</label> <br/>
+                <Button type="primary" className="" onClick={onSubmit}>
+                    Submit
+                </Button>
+            </div>
+            <div className="col-lg-3">
+                <label htmlFor="">&nbsp;</label> <br/>
+                
                 <Button type="warning" className="" onClick={handleReset}>
                     Reset Filters
                 </Button>
+                
             </div>
         </div>
     </>
