@@ -35,6 +35,12 @@ const Index = () => {
 
 
 	const changeHandler = (event) => {
+        var allowedExtensions =/(\.txt)$/i;
+        if (!allowedExtensions.exec(filePath)) {
+          inputRef.current.value = null;
+          alert("Invalid file type .txt files are accepted")
+          return;
+        }
         setFiles(event.target.files);
 		    setIsFilePicked(true);
 	};
