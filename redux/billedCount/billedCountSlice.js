@@ -10,9 +10,9 @@ export const getBilledCount = createAsyncThunk('billed/getConsumerArrears',
             }
         })
         .then(res => {
-            console.log('res');
-            console.log(res);
-            return{data:res.data}
+            console.log('resp....');
+            console.log(res)
+            return{data:res.data.billCounts,meterReaderData:res.data.meterReaderData}
         })
         .catch(err => {
             return{data:[]}
@@ -26,6 +26,7 @@ export const billedCountSlice = createSlice({
         loading: true,
         error: false,
         data: [],
+        meterReaderData:[],
     },
 	extraReducers: {
 		[getBilledCount.pending]: (state) => {
@@ -36,6 +37,7 @@ export const billedCountSlice = createSlice({
             state.loading = false
             state.error = false
             state.data = action.payload.data
+            state.meterReaderData = action.payload.meterReaderData
 		},
 		[getBilledCount.rejected]: (state) => {
 			state.loading = false

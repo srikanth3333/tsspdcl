@@ -33,11 +33,21 @@ let items = [
       icon: (<MenuFoldOutlined fontSize="small" />),
       label: 'File Upload'
     },
-    // {
-    //   href: '/billDelete',
-    //   icon: (<MenuFoldOutlined fontSize="small" />),
-    //   label: 'Bill Delete'
-    // },
+    {
+      href: '/meterReaders',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Meter Readers Status'
+    },
+    {
+      href: '/addUser',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Add User'
+    },
+    {
+      href: '/graphs',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Graphs'
+    },
 ]
 
 const Wrapper = ({children}) => {

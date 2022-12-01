@@ -132,15 +132,14 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
                     }
                 })
             }
-            <div className="col-lg-3">
+            <div className="col-lg-1">
                 <label htmlFor="">&nbsp;</label> <br/>
                 <Button type="primary" className="" onClick={onSubmit}>
                     Submit
                 </Button>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-1">
                 <label htmlFor="">&nbsp;</label> <br/>
-                
                 <Button type="warning" className="" onClick={handleReset}>
                     Reset Filters
                 </Button>

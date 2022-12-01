@@ -129,7 +129,7 @@ const Index = () => {
                       arrayData={['']}
                     />
                     <TableData
-                      data={data} 
+                      data={data.data} 
                       link={true}
                       linkIndex={[
                         {index:1,linkUrl:""},

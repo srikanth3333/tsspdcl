@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@mongodb-js/charts-embed-dom": "^2.3.0",
     "@reduxjs/toolkit": "^1.9.0",
     "@supercharge/strings": "^1.29.0",
     "antd": "^4.24.1",
@@ -19,6 +20,7 @@
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.39",
     "next": "13.0.3",
     "react": "18.2.0",
     "react-bootstrap": "^2.6.0",

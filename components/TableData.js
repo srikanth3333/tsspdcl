@@ -10,6 +10,8 @@ import Link from 'next/link'
 import { isDate } from "moment/moment";
 import {billDelete} from "../redux/billDelete/billDeleteSlice";
 const Str = require('@supercharge/strings')
+var momentTimezone = require('moment-timezone');
+
 
 
 function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeItems,deleteOption,arrayData}) {
@@ -22,7 +24,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
     dispatch(addFilters({data:apiObject}))
   },[dispatch])
 
-  if(!data || !data.data) {
+  if(!data || data.length == 0) {
     return (
       <>
         <div className="text-center mt-4">
@@ -46,11 +48,12 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
 
   
 
-  let objectData = data.data.length > 0 ? data.data.find((item,index) => index == 0) : null
+  let objectData = data.length > 0 ? data.find((item,index) => index == 0) : null
   let mapData = objectData != null ? Object.keys(objectData) : null;
   let filteredArray = excludeItems != undefined ? mapData && mapData.filter(e => !excludeItems.includes(e)) : mapData;
 
   let lp = !arrayData ? filteredArray && filteredArray.map((item,i) => {
+
       return {
           title: `${Str(item).replaceAll('_', ' ').title().get()}`,
           dataIndex: `${item}`,
@@ -79,6 +82,62 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           }
       }
     }) : arrayData.map((item,i) => {
+      
+      if(item.name == "pendingCount") {
+        return {
+            title: `Pending Sync`,
+            dataIndex: `${item.name}`,
+            key: i,
+            width: 180,
+            textWrap: 'word-break',
+            ellipsis: true,
+            render: (val,record) => {
+              
+              return(
+                <>
+                  {val < 0 ? '0' : val}
+                </>
+              )
+            }
+        }
+      }else if (item.name == "version") {
+        return {
+          title: `App Version`,
+          dataIndex: `${item.name}`,
+          key: i,
+          width: 180,
+          textWrap: 'word-break',
+          ellipsis: true,
+          render: (val,record) => {
+            
+            return(
+              <>
+                {val.replace('100000.','')}
+              </>
+            )
+          }
+       }
+      }else if(item.name == "timestamp") {
+        return {
+          title: `last Updated`,
+          dataIndex: `${item.name}`,
+          key: i,
+          width: 180,
+          textWrap: 'word-break',
+          ellipsis: true,
+          render: (val,record) => {
+            
+            return(
+              <>
+                <Moment format="DD/MM/YYYY">{val}</Moment> <br />
+                <Moment format="hh:mm:ss A">{val}</Moment>
+              </>
+            )
+          }
+       }
+      }
+
+
       return {
           title: `${item.label}`,
           dataIndex: `${item.name}`,
@@ -138,7 +197,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
                 style={{ whiteSpace: 'break-spaces'}}
                 loading={data.loading}
                 columns={lp}
-                dataSource={data.data}
+                dataSource={data}
                 scroll={{
                   x:600,
                   y: 300,
@@ -146,7 +205,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
                 pagination={paginate == true ? {
                   pageSize:20,
                   current: page, 
-                  total: data.data.length == 20 ? page * 20 + 1 : 20,
+                  total: data.length == 20 ? page * 20 + 1 : 20,
                   onChange: (page) => {
                     setPage(page)
                     dispatch(paginateApi({...filtersData.filterObject,page:page}))

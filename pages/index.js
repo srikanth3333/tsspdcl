@@ -19,9 +19,7 @@ const Index = () => {
 
     useEffect(() => {
       dispatch(getBilledCount(apiObject))
-    }, [dispatch])
-
-  console.log(data.data)
+    }, [dispatch])  
     
   return (
           <div>
@@ -44,7 +42,7 @@ const Index = () => {
                     />
                     
                     <TableData 
-                      data={data} 
+                      data={data.data} 
                       link={false}
                       filters={{}}
                       paginate={false}

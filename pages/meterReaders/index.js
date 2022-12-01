@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getBillStatus} from "../../redux/billStatus/billStatusSlice";
+import {getBilledCount} from "../../redux/billedCount/billedCountSlice";
 import Link from 'next/link';
 import Head from 'next/head';
 import TableData from "../../components/TableData";
@@ -10,22 +10,21 @@ import CountCard from "../../components/CountCard";
 
 const Index = () => {
 
-    let data = useSelector((state) => state.billStatus)
+    let data = useSelector((state) => state.billCount)
     const user = useSelector((state) => state.users) 
     
     let dispatch = useDispatch()
 
-    let apiObject = {uscNo:"",serviceNo:"",meterNo:''}
+    let apiObject = {eroCode:"",billDate:""}
 
     useEffect(() => {
-      dispatch(getBillStatus(apiObject))
-    }, [dispatch])
+      dispatch(getBilledCount(apiObject))
+    }, [dispatch])  
     
-
-    return (
+  return (
           <div>
             <Head>
-              <title>Bill Status</title>
+              <title>Meter Reader Status</title>
               <meta name="description" content="Powerthon" />
             </Head>
             <div className="count-card">
@@ -33,21 +32,26 @@ const Index = () => {
                 <div className="card-body">
                     <FilterCard 
                       objectData={apiObject}
-                      paginateApi={getBillStatus}
+                      paginateApi={getBilledCount}
                       data={[
-                        {label:"Service Number",type:"text",value:"serviceNo"},
-                        {label:"USC No",type:"text",value:"uscNo"},
-                        {label:"Meter No",type:"text",value:"meterNo"},
+                        {label:"ERO Code",type:"text",value:"eroCode"},
                       ]} 
-                      title="Bill Status"
+                      title="Meter Reader Status"
                     />
-                    <h3 className="my-4 text-center">{data.data?.message?.toUpperCase()}</h3>
+                    
                     <TableData 
-                      data={data.data.data} 
+                      data={data.meterReaderData} 
                       link={false}
                       filters={{}}
                       paginate={false}
-                      deleteOption={true}
+                      arrayData={[
+                        {name:'mobileNo',label:"Mobile Number"},
+                        {name:'name',label:"Name"},
+                        {name:'timestamp',label:"Last Updated"},
+                        {name:'bl',label:"Battery Percentage"},
+                        {name:'pendingCount',label:"Pending Sync"},
+                        {name:'version',label:"App Version"},
+                      ]}
                     />
                 </div>
               </div>
