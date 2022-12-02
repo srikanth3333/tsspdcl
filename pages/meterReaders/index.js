@@ -7,7 +7,6 @@ import TableData from "../../components/TableData";
 import FilterCard from "../../components/FilterCard";
 import CountCard from "../../components/CountCard";
 
-
 const Index = () => {
 
     let data = useSelector((state) => state.billCount)
@@ -20,6 +19,8 @@ const Index = () => {
     useEffect(() => {
       dispatch(getBilledCount(apiObject))
     }, [dispatch])  
+
+
     
   return (
           <div>

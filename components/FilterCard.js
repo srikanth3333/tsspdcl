@@ -6,7 +6,7 @@ import Download from "./Download";;
 import moment from 'moment';
 
 function FilterCard({title,objectData,paginateApi,data,finalCount,
-                    download,db,selectLoading,staticData,dataDownload}) {
+                    download,db,selectLoading,staticData,dataDownload,filterApi}) {
 
   const [objArr, setObjArr] = useState(objectData)
   
@@ -21,14 +21,14 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
   const onSubmit = () => {
     dispatch(paginateApi(objArr))
     dispatch(addFilters(objArr))
+    filterApi(objArr)
   }
 
   const handleReset = () => {
     setObjArr(objectData)
     dispatch(paginateApi(objectData))
+    filterApi(objectData)
   }
-
-  console.log(objArr)
 
   return (
     <>

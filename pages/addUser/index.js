@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useState,useRef} from "react";
+import {useState,useRef, useEffect} from "react";
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
 
@@ -56,6 +56,13 @@ const Index = () => {
             setHint('New user')
         })
     }
+
+    
+    useEffect(() => {
+        console.log(window.location.href)
+        
+        
+    },[])
 
 
     return (

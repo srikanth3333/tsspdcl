@@ -17,48 +17,46 @@ import animationData from './lotie/loading.json'
 
 const { Header, Sider, Content } = Layout;
 
-let items = [
-    {
-      href: '/',
-      icon: (<MenuFoldOutlined fontSize="small" />),
-      label: 'Home'
-    },
-    {
-      href: '/billStatus',
-      icon: (<MenuFoldOutlined fontSize="small" />),
-      label: 'Bill Status'
-    },
-    {
-      href: '/fileUpload',
-      icon: (<MenuFoldOutlined fontSize="small" />),
-      label: 'File Upload'
-    },
-    {
-      href: '/meterReaders',
-      icon: (<MenuFoldOutlined fontSize="small" />),
-      label: 'Meter Readers Status'
-    },
-    {
-      href: '/addUser',
-      icon: (<MenuFoldOutlined fontSize="small" />),
-      label: 'Add User'
-    },
-    {
-      href: '/graphs',
-      icon: (<MenuFoldOutlined fontSize="small" />),
-      label: 'Graphs'
-    },
-]
 
 const Wrapper = ({children}) => {
     
     const user = useSelector((state) => state.users) 
     const [collapsed, setCollapsed] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const [boardCode, setBoardCode] = React.useState();
-    const [agency, setAgency] = React.useState();
-    const [role, setRole] = React.useState();
-    const [loading, setLoading] = useState(true)
+
+    let items = [
+      {
+        href: '/',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'Home'
+      },
+      {
+        href: '/billStatus',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'Bill Status'
+      },
+      {
+        href: '/fileUpload',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'File Upload'
+      },
+      {
+        href: '/meterReaders',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'Meter Readers Status'
+      },
+      {
+        href: '/addUser',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'Add User'
+      },
+      user.role == "SAD" ?
+      {
+        href: '/graphs',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'Graphs'
+      } : null
+  ]
 
     const defaultOptions = {
       loop: true,
@@ -79,9 +77,9 @@ const Wrapper = ({children}) => {
       return (
             <div style={{minHeight:'100vh',alignItems: 'center',justifyContent: 'center',display:'flex'}}>
                 <Lottie 
-                        options={defaultOptions}
-                        height={400}
-                        width={400}
+                    options={defaultOptions}
+                    height={400}
+                    width={400}
                 />
             </div>
       )
@@ -142,19 +140,22 @@ const Wrapper = ({children}) => {
               padding: `0em 1em`,
             }}
           >
-            <div className="d-flex align-items-center justify-content-between mt-4">
+            <div className="d-flex align-items-center justify-content-between mt-0">
                 {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                   className: 'trigger',
                   onClick: () => setCollapsed(!collapsed),
                 })}
-                <button 
-                  className="btn btn-danger btn-sm"
-                onClick={() => {
-                  localStorage.clear();
-                  location.reload();
-                  }}>
-                    Logout
+                <div>
+                  <button 
+                    className="btn btn-danger btn-sm me-3"
+                    onClick={() => {
+                      localStorage.clear();
+                      location.reload();
+                    }}>
+                      Logout
                   </button>
+                  <button className="btn btn-info btn-sm">Help</button>
+                </div>
             </div>
           </Header>
           <Content

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
 export const uploadFile = createAsyncThunk('upload/uploadFile', 
 	async (payload, {getState}) => {
         return await axios.get(`https://mr.bharatsmr.com/TSSPDCL/inputfiles/info?page=${payload.page}&eroCode=${payload.eroCode}`, {
