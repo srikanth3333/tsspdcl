@@ -38,7 +38,7 @@ const Index = () => {
 
 
 	const changeHandler = (event) => {
-
+        console.log(event.target.files)
         setFiles(event.target.files);
 		    setIsFilePicked(true);
 	};
@@ -52,9 +52,7 @@ const Index = () => {
     for (let i = 0; i < files.length; i++) {
         formData.append(`txtFile`, files[i])
     }
-    console.log('upload')
-    console.log(files)
-    // return;
+
 		fetch(
 			'https://mr.bharatsmr.com/TSSPDCL/uploadinput',
 			// 'http://192.168.0.101:5000/TSSPDCL/uploadinput',
@@ -86,18 +84,17 @@ const Index = () => {
 	};
 
   const props = {
-    name: 'file',
-    // action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    name: 'txtFile',
+    action: 'http://192.168.0.101:5000/TSSPDCL/uploadinput',
     multiple: true,
     headers: {
       authorization: 'authorization-text',
+      authkey: localStorage.getItem('mobileNo')
     },
     onChange(info) {
+      setFiles(info.fileList)
       if (info.file.status !== 'uploading') {
-        console.log('filess')
-        // console.log(info.file, info.fileList);
-        console.log(info.fileList)
-        setFiles(info.fileList)
+        
       }
       if (info.file.status === 'done') {
         message.success(`${info.file.name} file uploaded successfully`);
@@ -141,11 +138,11 @@ const Index = () => {
                         <div className="col-lg-4">
                             <button className="btn btn-primary" type="submit">Submit</button>
                         </div>
-                        <div className="col-lg-4">
-                          {/* <Upload {...props}>
+                        {/* <div className="col-lg-4">
+                          <Upload {...props}>
                             <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                          </Upload> */}
-                        </div>
+                          </Upload>
+                        </div> */}
                     </form>
                     <FilterCard 
                       objectData={apiObject}

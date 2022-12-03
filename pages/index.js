@@ -20,7 +20,9 @@ const Index = () => {
 
     useEffect(() => {
       dispatch(getBilledCount(apiObject))
-      filterMeterReader(apiObject)
+      .then((res) => {
+        filterMeterReader(apiObject)
+      })
     }, [dispatch])  
 
   const filterMeterReader = (val) => {
@@ -56,6 +58,7 @@ const Index = () => {
                       ]} 
                       title="Billed Count"
                       filterApi={filterMeterReader}
+                      filterApiStatus={true}
                     />
                     
                     <TableData 
