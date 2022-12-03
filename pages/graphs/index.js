@@ -38,7 +38,7 @@ const Index = () => {
                     <div className="row">
                         {
                           chartIds.map((item,index) => (
-                            <div className="col-lg-6">
+                            <div className="col-lg-6" key={index}>
                               <Chart id={item}  name={`chart${index}`} filterId={index == 0 ? "ids" : null}  />
                             </div>
                           ))
