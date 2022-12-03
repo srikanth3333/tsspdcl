@@ -22,7 +22,7 @@ const Index = () => {
       dispatch(getBilledCount(apiObject))
     }, [dispatch])  
 
-  const count = data.data.reduce((acc,d) => d.billCount + acc,0)
+  const count = data?.data?.reduce((acc,d) => d.billCount + acc,0)
     
   return (
           <div>
