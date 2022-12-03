@@ -53,11 +53,11 @@ const Index = () => {
     
 
     useEffect(() => {
-      chart.render(document.querySelector('.chart'))
-      chart2.render(document.querySelector('.chart2'))
-      chart3.render(document.querySelector('.chart3'))
-      chart4.render(document.querySelector('.chart4'))
-      chart5.render(document.querySelector('.chart5'))
+        chart.render(document.querySelector('.chart'))
+        chart2.render(document.querySelector('.chart2'))
+        chart3.render(document.querySelector('.chart3'))
+        chart4.render(document.querySelector('.chart4'))
+        chart5.render(document.querySelector('.chart5'))
         const eroIdsData = document.querySelector('.ids')
         const date = document.querySelector('.date')
         eroIdsData.addEventListener('change', async (e) => {

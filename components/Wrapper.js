@@ -46,15 +46,16 @@ const Wrapper = ({children}) => {
         label: 'Meter Readers Status'
       },
       {
-        href: '/addUser',
-        icon: (<MenuFoldOutlined fontSize="small" />),
-        label: 'Add User'
-      },
-      user.role == "SAD" ?
-      {
         href: '/graphs',
         icon: (<MenuFoldOutlined fontSize="small" />),
         label: 'Graphs'
+      },
+      
+      user.role == "SAD" ?
+      {
+        href: '/addUser',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'Add User'
       } : null
   ]
 
@@ -121,8 +122,8 @@ const Wrapper = ({children}) => {
                   setSelectedIndex(index)
                   router.push(item.href)
                 }}>
-                  {item.icon}
-                  <span>{item.label}</span>
+                  {item?.icon}
+                  <span>{item?.label}</span>
                 </Menu.Item>
               ))
             }

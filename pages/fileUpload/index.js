@@ -7,6 +7,9 @@ import TableData from "../../components/TableData";
 import FilterCard from "../../components/FilterCard";
 import CountCard from "../../components/CountCard";
 import Messages from "../../components/Messages";
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, message, Upload } from 'antd';
+
 
 const Index = () => {
 
@@ -35,16 +38,6 @@ const Index = () => {
 
 
 	const changeHandler = (event) => {
-        // var allowedExtensions =/(\.txt)$/i;
-        // let data = event.target.files.length
-        // for(let i=0; i < data; i++) {
-        //   if (!allowedExtensions.exec(data[i].name)) {
-        //     alert("Invalid file type .txt files are accepted")
-        //     inputRef.current.value = null;
-        //     return;
-        //   }
-        // }
-        
 
         setFiles(event.target.files);
 		    setIsFilePicked(true);
@@ -59,6 +52,9 @@ const Index = () => {
     for (let i = 0; i < files.length; i++) {
         formData.append(`txtFile`, files[i])
     }
+    console.log('upload')
+    console.log(files)
+    // return;
 		fetch(
 			'https://mr.bharatsmr.com/TSSPDCL/uploadinput',
 			// 'http://192.168.0.101:5000/TSSPDCL/uploadinput',
@@ -89,7 +85,35 @@ const Index = () => {
     });
 	};
 
-  console.log(data.data)
+  const props = {
+    name: 'file',
+    // action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    multiple: true,
+    headers: {
+      authorization: 'authorization-text',
+    },
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log('filess')
+        // console.log(info.file, info.fileList);
+        console.log(info.fileList)
+        setFiles(info.fileList)
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    progress: {
+      strokeColor: {
+        '0%': '#108ee9',
+        '100%': '#87d068',
+      },
+      strokeWidth: 3,
+      format: (percent) => percent && `${parseFloat(percent.toFixed(2))}%`,
+    },
+  };
 
   
     
@@ -108,7 +132,7 @@ const Index = () => {
                     <form className="row my-2" onSubmit={handleSubmission}>
                         <div className="col-lg-4">
                             <div>
-                                <input type="file" accept=".txt" ref={inputRef} required className="form-control" multiple name="file" onChange={changeHandler} />
+                                <input type="file" accept=".txt" ref={inputRef}  className="form-control" multiple name="file" onChange={changeHandler} />
                             </div>
                         </div>
                         <div className="col-lg-4">
@@ -116,6 +140,11 @@ const Index = () => {
                         </div>
                         <div className="col-lg-4">
                             <button className="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                        <div className="col-lg-4">
+                          <Upload {...props}>
+                            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                          </Upload>
                         </div>
                     </form>
                     <FilterCard 
@@ -134,7 +163,7 @@ const Index = () => {
                       linkIndex={[
                         {index:1,linkUrl:""},
                       ]}
-                      deleteOption={true}
+                      deleteOption={false}
                       filters={{}}
                       paginate={false}
                       arrayData={[
