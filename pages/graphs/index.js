@@ -45,11 +45,11 @@ const Index = () => {
       width:'100%',
     });
 
-    const chart5 = sdk.createChart({
-      chartId: '638a07a4-eca4-493e-841b-550f6ce019ca',
-      height:'500px',
-      width:'100%',
-    });
+    // const chart5 = sdk.createChart({
+    //   chartId: '638a07a4-eca4-493e-841b-550f6ce019ca',
+    //   height:'500px',
+    //   width:'100%',
+    // });
     
 
     useEffect(() => {
@@ -57,9 +57,9 @@ const Index = () => {
         chart2.render(document.querySelector('.chart2'))
         chart3.render(document.querySelector('.chart3'))
         chart4.render(document.querySelector('.chart4'))
-        chart5.render(document.querySelector('.chart5'))
+        // chart5.render(document.querySelector('.chart5'))
         const eroIdsData = document.querySelector('.ids')
-        const date = document.querySelector('.date')
+        // const date = document.querySelector('.date')
         eroIdsData.addEventListener('change', async (e) => {
           if(eroIdsData.value == "") {
             chart.setFilter({})
@@ -67,14 +67,14 @@ const Index = () => {
             chart.setFilter({ "spoterocd": eroIdsData.value })
           }
         })
-        date.addEventListener('change', async (e) => {
-          console.log(date.value)
-          if(eroIdsData.value == "") {
-            chart5.setFilter({})
-          }else {
-            chart5.setFilter({ "createdAt": new Date(date.value) })
-          }
-        })
+        // date.addEventListener('change', async (e) => {
+        //   console.log(date.value)
+        //   if(eroIdsData.value == "") {
+        //     chart5.setFilter({})
+        //   }else {
+        //     chart5.setFilter({ "createdAt": new Date(date.value) })
+        //   }
+        // })
         return () => {}
     }, [])
 
@@ -88,7 +88,7 @@ const Index = () => {
               <div className="card mt-3">
                 <div className="card-body">
                     <div className="row">
-                      <div className="col-lg-4">
+                      <div className="col-lg-6">
                           <label htmlFor="">Ero List</label>
                           <select name="" onChange={(e) => setEroId(e.target.value)} id="" className="ids form-select mb-3">
                             <option value={""}>{"No Select"}</option>
@@ -98,19 +98,19 @@ const Index = () => {
                           </select>
                           <div className="chart"></div>
                       </div>
-                      <div className="col-lg-4">
+                      <div className="col-lg-6">
                           <div className="chart2"></div>
                       </div>
-                      <div className="col-lg-4">
+                      <div className="col-lg-6">
                         <div className="chart3"></div>
                       </div>
                       <div className="col-lg-6">
                         <div className="chart4"></div>
                       </div>
-                      <div className="col-lg-6">
+                      {/* <div className="col-lg-6">
                         <input type="date" className="date form-control" />
                         <div className="chart5"></div>
-                      </div>
+                      </div> */}
                     </div>
                 </div>
               </div>

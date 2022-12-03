@@ -16,21 +16,13 @@ const Index = () => {
     
     let dispatch = useDispatch()
 
-    let apiObject = {eroCode:"",billDate:"",mobileNo:""}
+    let apiObject = {eroCode:"",billDate:"",mobileNo:"",mrMobileNo:""}
 
     useEffect(() => {
       dispatch(getBilledCount(apiObject))
-      .then((res) => {
-        filterMeterReader(apiObject)
-      })
     }, [dispatch])  
 
-  const filterMeterReader = (val) => {
-    let filt = !val.mobileNo ? data.data : data.data.filter((item) => item.meterReader == val.mobileNo)
-    setFilterData(filt)
-  }
-
-  const count = filterData.reduce((acc,d) => d.billCount + acc,0)
+  const count = data.data.reduce((acc,d) => d.billCount + acc,0)
     
   return (
           <div>
@@ -54,15 +46,13 @@ const Index = () => {
                       data={[
                         {label:"ERO Code",type:"text",value:"eroCode"},
                         {label:"Bill Date",type:"date",value:"billDate"},
-                        {label:"Mobile Number",type:"text",value:"mobileNo"},
+                        {label:"Meter Reader Mobile Number",type:"text",value:"mobileNo"},
                       ]} 
                       title="Billed Count"
-                      filterApi={filterMeterReader}
-                      filterApiStatus={true}
                     />
                     
                     <TableData 
-                      data={filterData} 
+                      data={data.data} 
                       link={false}
                       filters={{}}
                       paginate={false}

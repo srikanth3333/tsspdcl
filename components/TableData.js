@@ -24,15 +24,15 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
     dispatch(addFilters({data:apiObject}))
   },[dispatch])
 
-  if(!data || data.length == 0) {
-    return (
-      <>
-        <div className="text-center mt-4">
-          <h6>Not valid data found for table. Please select filters correctly.</h6>
-        </div>
-      </>
-    )
-  }
+  // if(!data || data.length == 0) {
+  //   return (
+  //     <>
+  //       <div className="text-center mt-4">
+  //         <h6>Not valid data found for table. Please select filters correctly.</h6>
+  //       </div>
+  //     </>
+  //   )
+  // }
 
 
   const handleForm = (e,uscNo,serviceNo,meterNo) => {
@@ -48,7 +48,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
 
   
 
-  let objectData = data.length > 0 ? data.find((item,index) => index == 0) : null
+  let objectData = data?.length > 0 ? data.find((item,index) => index == 0) : null
   let mapData = objectData != null ? Object.keys(objectData) : null;
   let filteredArray = excludeItems != undefined ? mapData && mapData.filter(e => !excludeItems.includes(e)) : mapData;
 
@@ -167,8 +167,9 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
       }
     })
 
+    console.log(deleteOption)
 
-  deleteOption ? lp?.push({
+  deleteOption ==  true ? lp?.push({
     title: `Delete`,
     dataIndex: `Delete`,
     key: 10,
@@ -179,14 +180,13 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
       return(
         <>
           <form onSubmit={(e) => handleForm(e,record.uscNo,record.service_number,record.meter_number)}>
-            <button type="submit" className="btn btn-danger btn-sm">Delete</button>
+            <button type="submit" className="btn btn-info text-white btn-sm">Enable Rebill</button>
           </form>
         </>
       )
     }
   }) : null
 
-  
 
   return (
     <>
@@ -195,7 +195,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           <div className="col-lg-12">
             <Table
                 style={{ whiteSpace: 'break-spaces'}}
-                loading={data.loading}
+                loading={data?.loading}
                 columns={lp}
                 dataSource={data}
                 scroll={{
@@ -203,14 +203,14 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
                   y: 300,
                 }}
                 pagination={paginate == true ? {
-                  pageSize:20,
+                  pageSize: 20,
                   current: page, 
-                  total: data.length == 20 ? page * 20 + 1 : 20,
+                  total: page * 20 + data.length,
                   onChange: (page) => {
                     setPage(page)
-                    dispatch(paginateApi({...filtersData.filterObject,page:page}))
+                    dispatch(paginateApi({...filtersData.filterObject,page:page - 1}))
                   },
-                } : {showSizeChanger : true,pageSize:20,}}
+                } : {showSizeChanger:true,pageSize:20,}}
               />
           </div>
         </div>

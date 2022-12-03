@@ -93,3 +93,8 @@ p {
   font-weight: 500;
 }
 
+
+
+.ant-upload-list  {
+  display: none !important;
+}

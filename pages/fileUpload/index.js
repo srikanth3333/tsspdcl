@@ -19,6 +19,7 @@ const Index = () => {
 	  const [eroCode, setEroCode] = useState('');
     const [files, setFiles] = useState('');
     const [showMessage, setShowMessage] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     const inputRef = useRef(null);
@@ -45,14 +46,17 @@ const Index = () => {
 
 
 	const handleSubmission = (e) => {
+    // e.preventDefault();
     
-    e.preventDefault();
+    setLoading(true)
 		const formData = new FormData();
 		formData.append('eroCode', eroCode);
     for (let i = 0; i < files.length; i++) {
-        formData.append(`txtFile`, files[i])
+        
+        formData.append(`txtFile`, files[i].originFileObj)
     }
 
+    // return;
 		fetch(
 			'https://mr.bharatsmr.com/TSSPDCL/uploadinput',
 			// 'http://192.168.0.101:5000/TSSPDCL/uploadinput',
@@ -77,29 +81,30 @@ const Index = () => {
       resetFileInput()
       setSelectedFile(result)
       dispatch(uploadFile(apiObject))
+      setLoading(false)
     })
     .catch((error) => {
       console.error('Error:', error);
     });
 	};
 
+
   const props = {
-    name: 'txtFile',
-    action: 'http://192.168.0.101:5000/TSSPDCL/uploadinput',
+    // name: 'txtFile',
+    // action: 'http://192.168.0.101:5000/TSSPDCL/uploadinput',
     multiple: true,
-    headers: {
-      authorization: 'authorization-text',
-      authkey: localStorage.getItem('mobileNo')
-    },
+    // headers: {
+    //   authorization: 'authorization-text',
+    //   authkey: localStorage.getItem('mobileNo')
+    // },
     onChange(info) {
       setFiles(info.fileList)
-      if (info.file.status !== 'uploading') {
-        
+      if (info.file.status !== 'uploading') { 
       }
       if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
+        // message.success(`${info.file.name} file uploaded successfully`);
       } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
+        // message.error(`${info.file.name} file upload failed.`);
       }
     },
     progress: {
@@ -126,23 +131,30 @@ const Index = () => {
               <div className="card mt-3">
                 <div className="card-body">
                     <h5>Upload file here</h5>
-                    <form className="row my-2" onSubmit={handleSubmission}>
-                        <div className="col-lg-4">
+                    <form className="row my-2" >
+                        {/* <div className="col-lg-4">
                             <div>
                                 <input type="file" accept=".txt" ref={inputRef}  className="form-control" multiple name="file" onChange={changeHandler} />
                             </div>
                         </div>
                         <div className="col-lg-4">
                             <input type="text" required value={eroCode} placeholder="Enter ero code" className="form-control" onChange={(e) => setEroCode(e.target.value)} /> <br />
-                        </div>
-                        <div className="col-lg-4">
-                            <button className="btn btn-primary" type="submit">Submit</button>
-                        </div>
-                        {/* <div className="col-lg-4">
-                          <Upload {...props}>
+                        </div> */}
+                        
+                        <div className="col-lg-2">
+                          <Upload accept=".txt" ref={inputRef} {...props}>
                             <Button icon={<UploadOutlined />}>Click to Upload</Button>
                           </Upload>
-                        </div> */}
+                          <p className="mt-2"><b>{files.length} Files Selected</b></p>
+                          <p className="mt-2"><b>Select maximum of 100 files</b></p>
+                        </div>
+                        <div className="col-lg-4">
+                            <input type="text" required value={eroCode} placeholder="Enter ero code" className="form-control" onChange={(e) => setEroCode(e.target.value)} /> <br />
+                        </div>
+                        <div className="col-lg-4">
+                            <Button  onClick={handleSubmission} type="primary"  loading={loading}>Submit</Button>
+                            {/* <button className="btn btn-primary" type="submit">Submit</button> */}
+                        </div>
                     </form>
                     <FilterCard 
                       objectData={apiObject}
@@ -162,7 +174,9 @@ const Index = () => {
                       ]}
                       deleteOption={false}
                       filters={{}}
-                      paginate={false}
+                      paginate={true}
+                      paginateApi={uploadFile}
+                      apiObject={apiObject}
                       arrayData={[
                         {name:'filename',label:'File Name'},
                         {name:'s3Url',label:'URL'},

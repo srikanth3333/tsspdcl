@@ -20,7 +20,7 @@ const Index = () => {
     useEffect(() => {
       dispatch(getBillStatus(apiObject))
     }, [dispatch])
-    
+
 
     return (
           <div>
@@ -47,7 +47,7 @@ const Index = () => {
                       link={false}
                       filters={{}}
                       paginate={false}
-                      deleteOption={true}
+                      deleteOption={data.data?.data?.length > 0 ? true : false}
                     />
                 </div>
               </div>

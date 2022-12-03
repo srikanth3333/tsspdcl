@@ -21,13 +21,11 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
   const onSubmit = () => {
     dispatch(paginateApi(objArr))
     dispatch(addFilters(objArr))
-    !filterApi ? null : filterApi(objArr)
   }
 
   const handleReset = () => {
     setObjArr(objectData)
     dispatch(paginateApi(objectData))
-    !filterApi ? null : filterApi(objArr)
   }
 
   return (
