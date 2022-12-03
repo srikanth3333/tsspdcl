@@ -142,9 +142,9 @@ const Index = () => {
                             <button className="btn btn-primary" type="submit">Submit</button>
                         </div>
                         <div className="col-lg-4">
-                          <Upload {...props}>
+                          {/* <Upload {...props}>
                             <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                          </Upload>
+                          </Upload> */}
                         </div>
                     </form>
                     <FilterCard 
