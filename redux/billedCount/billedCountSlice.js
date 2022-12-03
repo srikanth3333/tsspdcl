@@ -5,7 +5,7 @@ import {getBoardName} from "../../utils/getBoard";
 export const getBilledCount = createAsyncThunk('billed/getConsumerArrears', 
 	async (payload, {getState}) => {
         let code = getBoardName()
-        return await axios.get(`https://mr.bharatsmr.com/TSSPDCL/billedcount?eroCode=${payload.eroCode}&billDate=${payload.billDate}&mrMobileNo=${payload.mrMobileNo}`, {
+        return await axios.get(`https://mr.bharatsmr.com/${code}/billedcount?eroCode=${payload.eroCode}&billDate=${payload.billDate}&mrMobileNo=${payload.mrMobileNo}`, {
             headers: {
                 authkey:localStorage.getItem('mobileNo'),
                 'Content-Type': 'application/json'

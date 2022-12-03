@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import {getBoardName} from "../../utils/getBoard";
 
 export const uploadFile = createAsyncThunk('upload/uploadFile', 
 	async (payload, {getState}) => {
+        let code = getBoardName()
         return await axios.get(`https://mr.bharatsmr.com/TSSPDCL/inputfiles/info?page=${payload.page}&eroCode=${payload.eroCode}`, {
         // return await axios.get(`http://192.168.0.101:5000/TSSPDCL/inputfiles/info?page=${payload.page}&eroCode=${payload.eroCode}`, {
             headers: {

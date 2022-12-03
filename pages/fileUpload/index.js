@@ -9,7 +9,7 @@ import CountCard from "../../components/CountCard";
 import Messages from "../../components/Messages";
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, message, Upload } from 'antd';
-
+import {getBoardName} from "../../utils/getBoard";
 
 const Index = () => {
 
@@ -20,7 +20,7 @@ const Index = () => {
     const [files, setFiles] = useState('');
     const [showMessage, setShowMessage] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    let code =  getBoardName()
 
     const inputRef = useRef(null);
 
@@ -58,7 +58,7 @@ const Index = () => {
 
     // return;
 		fetch(
-			'https://mr.bharatsmr.com/TSSPDCL/uploadinput',
+			`https://mr.bharatsmr.com/${code}/uploadinput`,
 			// 'http://192.168.0.101:5000/TSSPDCL/uploadinput',
 			{
 				method: 'POST',
