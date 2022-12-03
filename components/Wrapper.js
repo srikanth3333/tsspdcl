@@ -14,6 +14,7 @@ import {logout, updateData,tokenLogin} from '../redux/auth/userSlice';
 import Login from './Login';
 import Lottie from 'react-lottie';
 import animationData from './lotie/loading.json'
+import Link from 'next/link';
 
 const { Header, Sider, Content } = Layout;
 
@@ -155,7 +156,7 @@ const Wrapper = ({children}) => {
                     }}>
                       Logout
                   </button>
-                  <button className="btn btn-info btn-sm">Help</button>
+                  <Link href="/help" className="btn btn-info btn-sm">Help</Link>
                 </div>
             </div>
           </Header>
