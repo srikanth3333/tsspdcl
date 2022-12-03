@@ -24,7 +24,7 @@ const Index = () => {
             method: 'post',
             url: 'https://mr.bharatsmr.com/TSSPDCL/register/user',
             headers: { 
-                'authkey': '9391962924', 
+                'authkey': localStorage.getItem('mobileNo'), 
                 'Content-Type': 'application/json'
             },
             data : data
