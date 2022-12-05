@@ -52,7 +52,7 @@ const Wrapper = ({children}) => {
         label: 'Graphs'
       },
       {
-        href: '/jsPdf',
+        href: '/billPdf',
         icon: (<MenuFoldOutlined fontSize="small" />),
         label: 'Bill PDF'
       },
