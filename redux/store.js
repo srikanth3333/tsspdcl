@@ -5,6 +5,7 @@ import billReducer from "./billedCount/billedCountSlice";
 import billStatusReducer from "./billStatus/billStatusSlice";
 import uploadReducer from "./fileUpload/fileUploadSlice";
 import billDeleteReducer from "./billDelete/billDeleteSlice";
+import billDataReducer from "./billData/billDataSlice";
 
 export default configureStore({
 	reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
 		billStatus:billStatusReducer,
 		uploadData:uploadReducer,
 		billDelete:billDeleteReducer,
+		billData:billDataReducer
 	},
 });

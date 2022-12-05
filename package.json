@@ -20,6 +20,8 @@
     "bootstrap": "^5.2.2",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.39",
     "next": "13.0.3",

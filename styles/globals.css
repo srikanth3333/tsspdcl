@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,900&display=swap');
+
 html,
 body {
   padding: 0;
@@ -98,4 +100,49 @@ p {
 
 .ant-upload-list  {
   display: none !important;
+}
+
+.flex-item {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.billPdf {
+  font-family: 'Roboto', sans-serif;
+}
+
+.billPdf hr {
+  border: none;
+  border-top: 2px dashed;
+  border-color: #115b98 !important;
+}
+
+.hr-thick {
+  border-top: 4px dashed #115b98 !important;
+}
+
+.billPdf p{
+  color: #115b98;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.color-red {
+  color: #fe0000;
+}
+
+.text-space {
+  letter-spacing: 4px;
+  color: #115b98;
+}
+
+.font-lg {
+  font-size: 22px !important;
 }

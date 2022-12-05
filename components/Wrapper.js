@@ -51,8 +51,13 @@ const Wrapper = ({children}) => {
         icon: (<MenuFoldOutlined fontSize="small" />),
         label: 'Graphs'
       },
+      {
+        href: '/jsPdf',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'Bill PDF'
+      },
       
-      user.role == "SAD" ?
+      user?.role == "SAD" ?
       {
         href: '/addUser',
         icon: (<MenuFoldOutlined fontSize="small" />),
