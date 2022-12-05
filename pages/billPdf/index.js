@@ -56,7 +56,7 @@ const Index = () => {
                             
                             <div className="text-center">
                                 <div>
-                                    <h2 className="title text-space">TSNPDCL</h2>                                
+                                    <h2 className="title text-space">TSSPDCL</h2>                                
                                 </div>
                                 <hr />
                                 <div>
@@ -144,7 +144,7 @@ const Index = () => {
                                 
                                 <div className="flex-item"> 
                                     <p>RMD: 0.0</p>
-                                    <p> Avg: 18.7</p>
+                                    <p>Avg: 18.7</p>
                                 </div>
                                 <div className="flex-item"> 
                                     <p>Meter No: 00000001</p>
@@ -250,7 +250,7 @@ const Index = () => {
                                 <div className="text-center font-lg">
                                     <p>For AAO/ERO/TEST_ERO</p>
                                     <p>TOLL FREE: 1912 / 18004250028</p>
-                                    <p>https://tsnpdcl.in/</p>
+                                    <p>https://tsspdcl.in/</p>
                                 </div>
                             </div>
                         </div>
