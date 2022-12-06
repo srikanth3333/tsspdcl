@@ -14,12 +14,13 @@ const Index = () => {
     
     let dispatch = useDispatch()
 
-    let apiObject = {eroCode:"",billDate:""}
+    let apiObject = {eroCode:"",billDate:"",mrMobileNo:""}
 
     useEffect(() => {
       dispatch(getBilledCount(apiObject))
     }, [dispatch])  
 
+    
 
     
   return (
