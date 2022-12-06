@@ -1,8 +1,9 @@
 
 
 export const getBoardName = () => {
-    let string = window.location.hostname
-    string.substring(string.indexOf('/') + 1).split('.')[0]
-    // return string;
-    return "TSSPDCL";
+    let string = window.location.href
+    let final = string.substring(string.indexOf('//') + 1).split('.')[0]
+    let output = final.replace("/","").toUpperCase()
+    // return "TSSPDCL";
+    return output;
 }

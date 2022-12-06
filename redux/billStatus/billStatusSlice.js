@@ -12,10 +12,12 @@ export const getBillStatus = createAsyncThunk('bil/getBillStat',
             }
         })
         .then(res => {
+            console.log('resp...')
             console.log(res)
             return{data:res.data}
         })
         .catch(err => {
+            console.log(JSON.stringify(err))
             return{data:[]}
         })
 	}

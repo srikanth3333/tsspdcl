@@ -39,8 +39,6 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
     e.preventDefault();
     dispatch(billDelete({uscNo:uscNo,serviceNo:'',meterNo:''}))
     .then(res => {
-      console.log('resp....')
-      console.log(res)
       location.reload();
     })
   }
@@ -166,8 +164,6 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           }
       }
     })
-
-    console.log(deleteOption)
 
   deleteOption ==  true ? lp?.push({
     title: `Delete`,

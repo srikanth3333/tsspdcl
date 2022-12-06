@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import {getBoardName} from "../../utils/getBoard";
+import {getBoardName} from "../../utils/getBoard";
 
 export const getBillData = createAsyncThunk('bill/data', 
 	async (payload, {getState}) => {
-        console.log('called')
-        return await axios.get(`https://mr.bharatsmr.com/TSSPDCL/bill/data?uscNo=${payload.uscNo}&serviceNo=${payload.serviceNo}`, {
+        let code = getBoardName()   
+        return await axios.get(`https://mr.bharatsmr.com/${code}/bill/data?uscNo=${payload.uscNo}&serviceNo=${payload.serviceNo}`, {
             headers: {
                 authkey:localStorage.getItem('mobileNo'),
                 'Content-Type': 'application/json'
