@@ -14,7 +14,7 @@ var momentTimezone = require('moment-timezone');
 
 
 
-function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeItems,deleteOption,arrayData}) {
+function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeItems,deleteOption,arrayData,loading}) {
 
   let filtersData = useSelector((state) => state.users)
   let dispatch = useDispatch()
@@ -191,7 +191,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           <div className="col-lg-12">
             <Table
                 style={{ whiteSpace: 'break-spaces'}}
-                loading={data?.loading}
+                loading={loading?.loading}
                 columns={lp}
                 dataSource={data}
                 scroll={{

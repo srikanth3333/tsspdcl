@@ -45,6 +45,7 @@ const Index = () => {
                       data={data.meterReaderData} 
                       link={false}
                       filters={{}}
+                      loading={data}
                       paginate={false}
                       arrayData={[
                         {name:'mobileNo',label:"Mobile Number"},

@@ -46,6 +46,7 @@ const Index = () => {
                     <TableData 
                       data={data.data.data} 
                       link={false}
+                      loading={data}
                       filters={{}}
                       paginate={false}
                       deleteOption={data.data?.data?.length > 0 ? true : false}

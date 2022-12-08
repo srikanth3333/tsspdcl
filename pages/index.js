@@ -46,7 +46,7 @@ const Index = () => {
                       data={[
                         {label:"ERO Code",type:"text",value:"eroCode"},
                         {label:"Bill Date",type:"date",value:"billDate"},
-                        {label:"Meter Reader Mobile Number",type:"text",value:"mobileNo"},
+                        {label:"Meter Reader Mobile Number",type:"text",value:"mrMobileNo"},
                       ]} 
                       title="Billed Count"
                     />
@@ -54,6 +54,7 @@ const Index = () => {
                     <TableData 
                       data={data.data} 
                       link={false}
+                      loading={data}
                       filters={{}}
                       paginate={false}
                       arrayData={[
