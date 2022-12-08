@@ -15,6 +15,7 @@ import Login from './Login';
 import Lottie from 'react-lottie';
 import animationData from './lotie/loading.json'
 import Link from 'next/link';
+import {getBoardName} from "../utils/getBoard";
 
 const { Header, Sider, Content } = Layout;
 
@@ -24,6 +25,8 @@ const Wrapper = ({children}) => {
     const user = useSelector((state) => state.users) 
     const [collapsed, setCollapsed] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [code,setCode] = useState('')
+    
 
     let items = [
       {
@@ -65,6 +68,28 @@ const Wrapper = ({children}) => {
       } : null
   ]
 
+  let otherItems = [{
+      href: '/',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Home'
+    },
+    {
+      href: '/billStatus',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Bill Status'
+    },
+
+    {
+      href: '/meterReaders',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Meter Readers Status'
+    },
+    {
+      href: '/graphs',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Graphs'
+    },];
+
     const defaultOptions = {
       loop: true,
       autoplay: true, 
@@ -78,6 +103,7 @@ const Wrapper = ({children}) => {
 
     useEffect(() => {
       dispatch(tokenLogin())
+      setCode(getBoardName())
     },[dispatch])
 
     if(user.loading == true) {
@@ -123,7 +149,16 @@ const Wrapper = ({children}) => {
             }
             
             {
+              code != "TSNPDCL" ?
               items.map((item, index) => (
+                <Menu.Item key={index} onClick={() => {
+                  setSelectedIndex(index)
+                  router.push(item.href)
+                }}>
+                  {item?.icon}
+                  <span>{item?.label}</span>
+                </Menu.Item>
+              )) : otherItems.map((item, index) => (
                 <Menu.Item key={index} onClick={() => {
                   setSelectedIndex(index)
                   router.push(item.href)
