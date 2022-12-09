@@ -159,7 +159,8 @@ const Index = () => {
                     <FilterCard 
                       objectData={apiObject}
                       paginateApi={uploadFile}
-                      // flag={"Circle"}
+                      download={null}
+                      dataDownload={data.data.data}
                       data={[
                         {label:"ERO Code",type:"text",value:"eroCode"},
                       ]} 

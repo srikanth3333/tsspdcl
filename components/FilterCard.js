@@ -34,7 +34,11 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
             <div className="col-lg-12">
                 <div className="d-flex justify-content-between align-items-center flex-wrap">
                     <h3 className="filter-card-title">{title}</h3>
-                    {/* <Download dataDownload={dataDownload} download={download} apiObject={objArr} finalCount={finalCount} /> */}
+                    {
+                        download == null ? null :
+                        <Download dataDownload={dataDownload} download={download} apiObject={objArr} finalCount={finalCount} />
+                    }
+                    
                 </div>
             </div>
             {

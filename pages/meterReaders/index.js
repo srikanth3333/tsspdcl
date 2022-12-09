@@ -35,6 +35,8 @@ const Index = () => {
                     <FilterCard 
                       objectData={apiObject}
                       paginateApi={getBilledCount}
+                      download={false}
+                      dataDownload={data.data.data}
                       data={[
                         {label:"ERO Code",type:"text",value:"eroCode"},
                       ]} 

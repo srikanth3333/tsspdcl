@@ -42,7 +42,8 @@ const Index = () => {
                     <FilterCard 
                       objectData={apiObject}
                       paginateApi={getBilledCount}
-                      // flag={"Circle"}
+                      download={false}
+                      dataDownload={data.data}
                       data={[
                         {label:"ERO Code",type:"text",value:"eroCode"},
                         {label:"Bill Date",type:"date",value:"billDate"},

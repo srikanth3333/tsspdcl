@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Chart from "../../components/Chart";
-
-
+import {getBoardName} from "../../utils/getBoard";
 
 const chartIds = [
   "63627b5e-8dde-455c-8549-6dfa56c43c7a",
@@ -23,8 +22,31 @@ const chartIds = [
   "638a07a4-eca4-490a-877e-550f6ce019e8",
 ]
 
+const chartIdsTsn = [
+  "639189cb-c44a-405b-89b3-395721d2352e",
+  "639189cb-c44a-491d-8b4f-395721d23530",
+  "639189cb-c44a-486b-8622-395721d2352a",
+  "639189cb-c44a-48dc-8b4a-395721d23526",
+  "639189cb-c44a-42dc-8645-395721d2352c",
+  "639189cb-c44a-4f5c-81c4-395721d23534",
+  "639189cb-c44a-4fcb-83f8-395721d23518",
+  "639189cb-c44a-4bdc-8f0f-395721d23532",
+  "639189cb-c44a-4ee2-8d67-395721d23524",
+  "639189cb-c44a-4f92-8107-395721d2351e",
+  "639189cb-c44a-4efd-8d99-395721d23522",
+  "639189cb-c44a-49d3-8acd-395721d23536",
+  "639189cb-c44a-4e4f-8b10-395721d23520",
+  "639189cb-c44a-4566-80d2-395721d23538",
+  "639189cb-c44a-4feb-8ebe-395721d2351a",
+  "639189cb-c44a-45cd-8db9-395721d23528",
+]
+
 
 const Index = () => {
+
+    let boardCode = getBoardName();
+
+    console.log(boardCode)
 
     return (
           <div>
@@ -37,7 +59,11 @@ const Index = () => {
                 <div className="card-body">
                     <div className="row">
                         {
-                          chartIds.map((item,index) => (
+                          boardCode != "TSNPDCL" ? chartIds.map((item,index) => (
+                            <div className="col-lg-6" key={index}>
+                              <Chart id={item}  name={`chart${index}`} filterId={index == 0 ? "ids" : null}  />
+                            </div>
+                          )) : chartIdsTsn.map((item,index) => (
                             <div className="col-lg-6" key={index}>
                               <Chart id={item}  name={`chart${index}`} filterId={index == 0 ? "ids" : null}  />
                             </div>

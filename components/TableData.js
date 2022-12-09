@@ -143,6 +143,9 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           width: 180,
           textWrap: 'word-break',
           ellipsis: true,
+          sorter: (a, b) => {
+            return a[item.name] - b[item.name]
+          },
           render: (val,record) => {
             let ids = linkIndex && linkIndex.map((ddr) => ddr.index)
             let final = linkIndex && linkIndex.reduce((acc,ddr) => {
@@ -183,6 +186,11 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
     }
   }) : null
 
+  const onChange = (pagination, filters, sorter, extra) => {
+    console.log(sorter.field);
+    return extra.currentDataSource.sort();
+  };
+
 
   return (
     <>
@@ -194,6 +202,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
                 loading={loading?.loading}
                 columns={lp}
                 dataSource={data}
+                onChange={onChange}
                 scroll={{
                   x:600,
                   y: 300,
@@ -206,7 +215,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
                     setPage(page)
                     dispatch(paginateApi({...filtersData.filterObject,page:page - 1}))
                   },
-                } : {showSizeChanger:true,pageSize:20,}}
+                } : {showSizeChanger:true,pageSize:20}}
               />
           </div>
         </div>
