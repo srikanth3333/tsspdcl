@@ -59,13 +59,15 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           width: 180,
           textWrap: 'word-break',
           ellipsis: true,
+          sorter: (a, b) => {
+            return a[item.name] - b[item.name]
+          },
           render: (val,record) => {
             let ids = linkIndex && linkIndex.map((ddr) => ddr.index)
             let final = linkIndex && linkIndex.reduce((acc,ddr) => {
               return {...acc, [ddr.index]:{index:ddr.index,link:ddr.linkUrl,
                 linkExtend:ddr.linkExtend,noLink:ddr.noLink}}
             },{})
-            
             return(
               <>
                 {
@@ -80,7 +82,6 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           }
       }
     }) : arrayData.map((item,i) => {
-      
       if(item.name == "pendingCount") {
         return {
             title: `Pending Sync`,
@@ -89,8 +90,10 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
             width: 180,
             textWrap: 'word-break',
             ellipsis: true,
+            sorter: (a, b) => {
+              return a[item.name] - b[item.name]
+            },
             render: (val,record) => {
-              
               return(
                 <>
                   {val < 0 ? '0' : val}
@@ -106,8 +109,10 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           width: 180,
           textWrap: 'word-break',
           ellipsis: true,
+          sorter: (a, b) => {
+            return a[item.name] - b[item.name]
+          },
           render: (val,record) => {
-            
             return(
               <>
                 {val.replace('100000.','')}
@@ -123,6 +128,9 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           width: 180,
           textWrap: 'word-break',
           ellipsis: true,
+          sorter: (a, b) => {
+            return a[item.name] - b[item.name]
+          },
           render: (val,record) => {
             
             return(

@@ -36,7 +36,6 @@ function Download({apiObject,finalCount,download,dataDownload}) {
         setTimeout(() => {
             let button = document.getElementById('dn-btn')
             button.click();
-            console.log(downloadDataArray)
             setDownloadDataArray([])
         },1000)
         setShowMessage(true)
@@ -75,7 +74,7 @@ function Download({apiObject,finalCount,download,dataDownload}) {
         
         <CSVLink
             filename={`${Math.floor((Math.random() * 100) + 1)}.xls`}
-            data={downloadDataArray.flat()}
+            data={downloadDataArray != undefined && downloadDataArray.length > 0 ? downloadDataArray.flat() : []}
             className="btn btn-primary btn-sm d-none"
             id="dn-btn"
         >
