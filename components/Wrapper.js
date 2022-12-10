@@ -59,6 +59,11 @@ const Wrapper = ({children}) => {
         icon: (<MenuFoldOutlined fontSize="small" />),
         label: 'Bill PDF'
       },
+      {
+        href: '/inputData',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'Input Data'
+      },
       
       user?.role == "SAD" ?
       {
