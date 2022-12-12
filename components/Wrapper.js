@@ -90,6 +90,11 @@ const Wrapper = ({children}) => {
       label: 'Meter Readers Status'
     },
     {
+      href: '/inputData',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Input Data'
+    },
+    {
       href: '/graphs',
       icon: (<MenuFoldOutlined fontSize="small" />),
       label: 'Graphs'

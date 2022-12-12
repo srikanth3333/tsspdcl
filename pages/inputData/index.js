@@ -15,7 +15,7 @@ const Index = () => {
     
     let dispatch = useDispatch()
 
-    let apiObject = {eroCode:"026",structureCode:"[1462011007]",page:0}
+    let apiObject = {eroCode:"",structureCode:"",page:0}
 
     useEffect(() => {
       dispatch(getInputData(apiObject))

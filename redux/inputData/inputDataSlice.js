@@ -5,7 +5,7 @@ import {getBoardName} from "../../utils/getBoard";
 export const getInputData= createAsyncThunk('input/inputData', 
 	async (payload, {getState}) => {
         let code = getBoardName()
-        return await axios.get(`https://mr.bharatsmr.com/TSSPDCL/fetch/inputdata?eroCode=${payload.eroCode}&structureCode=${payload.structureCode}&page=${payload.page}&limitRecords=20`, {
+        return await axios.get(`https://mr.bharatsmr.com/${code}/fetch/inputdata?eroCode=${payload.eroCode}&structureCode=["${payload.structureCode}"]&page=${payload.page}&limitRecords=20`, {
             headers: {
                 authkey:localStorage.getItem('mobileNo'),
                 'Content-Type': 'application/json'
