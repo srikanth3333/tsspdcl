@@ -5,7 +5,11 @@ import {getBoardName} from "../../utils/getBoard";
 export const getInputData= createAsyncThunk('input/inputData', 
 	async (payload, {getState}) => {
         let code = getBoardName()
-        return await axios.get(`https://mr.bharatsmr.com/${code}/fetch/inputdata?eroCode=${payload.eroCode}&structureCode=["${payload.structureCode}"]&page=${payload.page}&limitRecords=20`, {
+        let output = payload.structureCode.split(',')
+        let final = output.join("\",\"") 
+        console.log(`["${final}"]`)
+        console.log(payload.structureCode.length)
+        return await axios.get(`https://mr.bharatsmr.com/${code}/fetch/inputdata?eroCode=${payload.eroCode}&structureCode=["${final}"]&page=${payload.page}&limitRecords=20`, {
             headers: {
                 authkey:localStorage.getItem('mobileNo'),
                 'Content-Type': 'application/json'
