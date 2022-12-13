@@ -17,13 +17,20 @@ const Chart = ({id,name,filterId}) => {
       height:'400px',
       width:'100%',
     });
+
+    console.log()
     
 
     useEffect(() => {
         const filterSelect =  document.querySelector(`.ids`)
         filterSelect.addEventListener('change', async (e) => {
             if(filterSelect.value == "") {
-              chart.setFilter({})
+                if(user?.role != "SAD") {
+                    chart.setFilter({"spoterocd": eroId})
+                }else {
+                    chart.setFilter({"spoterocd": ""})
+                }
+              
             }else {
               chart.setFilter({ "spoterocd": filterSelect.value })
             }

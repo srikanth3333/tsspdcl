@@ -9,7 +9,7 @@ export const getInputData= createAsyncThunk('input/inputData',
         let final = output.join("\",\"") 
         console.log(`["${final}"]`)
         console.log(payload.structureCode.length)
-        return await axios.get(`https://mr.bharatsmr.com/${code}/fetch/inputdata?eroCode=${payload.eroCode}&structureCode=["${final}"]&page=${payload.page}&limitRecords=20`, {
+        return await axios.get(`https://mr.bharatsmr.com/${code}/fetch/inputdata?eroCode=${payload.eroCode}&structureCode=["${final}"]&areaCode=${payload.areaCode}&page=${payload.page}&limitRecords=2000`, {
             headers: {
                 authkey:localStorage.getItem('mobileNo'),
                 'Content-Type': 'application/json'

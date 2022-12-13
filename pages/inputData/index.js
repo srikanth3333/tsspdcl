@@ -15,18 +15,18 @@ const Index = () => {
     
     let dispatch = useDispatch()
 
-    let apiObject = {eroCode:"",structureCode:"",page:0}
+    let apiObject = {eroCode:"",structureCode:"",page:0,areaCode:""}
 
     useEffect(() => {
       dispatch(getInputData(apiObject))
     }, [dispatch])
 
-    console.log(apiObject.structureCode)
+    
     
     return (
           <div>
             <Head>
-              <title>Input Data</title>
+              <title>Unbilled Data</title>
               <meta name="description" content="Powerthon" />
             </Head>
             <div className="count-card">
@@ -40,16 +40,18 @@ const Index = () => {
                       data={[
                         {label:"Ero Code",type:"text",value:"eroCode"},
                         {label:"Structure Code",type:"text",value:"structureCode"},
+                        {label:"Area Code",type:"text",value:"areaCode"},
                       ]} 
-                      title="Input Data"
+                      title="Unbilled Data"
                     />
+                    <p className="mt-2"><b>Note:</b> Maximum 2000 services will be shown</p>
                     <TableData 
                       data={data.data} 
                       link={false}
                       loading={data}
                       filters={{}}
-                      paginate={true}
-                      paginateApi={getInputData}
+                      paginate={false}
+                      // paginateApi={getInputData}
                       apiObject={apiObject}
                       deleteOption={false}
                     />

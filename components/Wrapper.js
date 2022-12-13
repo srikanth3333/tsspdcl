@@ -62,7 +62,7 @@ const Wrapper = ({children}) => {
       {
         href: '/inputData',
         icon: (<MenuFoldOutlined fontSize="small" />),
-        label: 'Input Data'
+        label: 'Unbilled Data'
       },
       
       user?.role == "SAD" ?
@@ -98,7 +98,14 @@ const Wrapper = ({children}) => {
       href: '/graphs',
       icon: (<MenuFoldOutlined fontSize="small" />),
       label: 'Graphs'
-    },];
+    },
+    user?.role == "SAD" ?
+    {
+      href: '/addUser',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Add User'
+    } : null
+  ];
 
     const defaultOptions = {
       loop: true,
