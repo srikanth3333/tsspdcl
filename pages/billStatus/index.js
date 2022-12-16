@@ -21,7 +21,6 @@ const Index = () => {
       dispatch(getBillStatus(apiObject))
     }, [dispatch])
 
-
     
     return (
           <div>
@@ -51,7 +50,7 @@ const Index = () => {
                       loading={data}
                       filters={{}}
                       paginate={false}
-                      deleteOption={data.data?.data?.length > 0 ? true : false}
+                      deleteOption={data.data?.data?.length > 0 && [1,2,4,5].includes(data.data?.status) ? true : false}
                     />
                 </div>
               </div>
