@@ -115,7 +115,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           render: (val,record) => {
             return(
               <>
-                {val.replace('100000.','')}
+                {val?.replace('100000.','')}
               </>
             )
           }
