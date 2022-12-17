@@ -14,7 +14,7 @@ var momentTimezone = require('moment-timezone');
 
 
 
-function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeItems,deleteOption,arrayData,loading}) {
+function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeItems,deleteOption,arrayData,loading,linkPage}) {
 
   let filtersData = useSelector((state) => state.users)
   let dispatch = useDispatch()
@@ -116,6 +116,75 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
             return(
               <>
                 {val?.replace('100000.','')}
+              </>
+            )
+          }
+       }
+      }else if(item.name == "mobileNo") {
+        return {
+          title: `Mobile No`,
+          dataIndex: `${item.name}`,
+          key: i,
+          width: 180,
+          textWrap: 'word-break',
+          ellipsis: true,
+          sorter: (a, b) => {
+            return a[item.name] - b[item.name]
+          },
+          render: (val,record) => {
+            return(
+              <>
+                <Link href={`${item.linkPage}/${val}`}>{val}</Link>
+              </>
+            )
+          }
+       }
+      }else if(item.name == "readings") {
+        return {
+          title: `Readings`,
+          dataIndex: `${item.name}`,
+          key: i,
+          width: 180,
+          textWrap: 'word-break',
+          ellipsis: true,
+          sorter: (a, b) => {
+            return a[item.name] - b[item.name]
+          },
+          render: (val,record) => {
+            return(
+              <>
+                {val != null ?
+                    Object.entries(val).map(([key, value]) => {
+                        return (
+                            <>
+                            {
+                                <div className="text-center">
+                                    <img style={{cursor: 'pointer'}}
+                                    // onClick={() => {
+                                    //     setZoomImage(value.bigImg)
+                                    //     handleShow()
+                                    // }}
+                                    src={value.smallImg} height="70px"></img>
+                                    <p className="mt-2"><b>Value: {value.actualValue ? value.actualValue : value.scanValue} </b></p>
+                                    <p className="mt-2"><b>Serial Number: {value?.insights && value.insights?.p_serial ? value.insights?.p_serial : value?.insights?.p_serial} </b></p>
+                                    <p><b>{key}</b></p>
+                                    <p><b>{value.analysisRemark}</b></p>
+                                </div>
+                            }
+                              
+                            </>
+                        )
+                    })
+                :
+                    <img src={getImg}
+                    style={{cursor: 'pointer'}}
+                    onClick={() => {
+                        // setZoomImage(getImg)
+                        // handleShow()
+                    }}
+
+                    height="70px" />
+                }
               </>
             )
           }

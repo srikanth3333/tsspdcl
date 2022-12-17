@@ -7,6 +7,10 @@ import uploadReducer from "./fileUpload/fileUploadSlice";
 import billDeleteReducer from "./billDelete/billDeleteSlice";
 import billDataReducer from "./billData/billDataSlice";
 import inputDataReducer from "./inputData/inputDataSlice";
+import analysisGraphReducer from "./analysisRemarks/analysisGraph";
+import analysisExceptionReducer from "./analysisRemarks/analysisException";
+import analysisSummaryReducer from "./analysisRemarks/analysisSummary";
+
 
 export default configureStore({
 	reducer: {
@@ -17,6 +21,9 @@ export default configureStore({
 		uploadData:uploadReducer,
 		billDelete:billDeleteReducer,
 		billData:billDataReducer,
-		inputData:inputDataReducer
+		inputData:inputDataReducer,
+		analysisGraph:analysisGraphReducer,
+		analysisException:analysisExceptionReducer,
+		analysisSummary:analysisSummaryReducer
 	},
 });

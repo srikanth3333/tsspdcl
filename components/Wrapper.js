@@ -64,6 +64,11 @@ const Wrapper = ({children}) => {
         icon: (<MenuFoldOutlined fontSize="small" />),
         label: 'Unbilled Data'
       },
+      {
+        href: '/analysisRemarks',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'Analysis Remark'
+      },
       
       user?.role == "SAD" ?
       {
@@ -98,6 +103,11 @@ const Wrapper = ({children}) => {
       href: '/graphs',
       icon: (<MenuFoldOutlined fontSize="small" />),
       label: 'Graphs'
+    },
+    {
+      href: '/analysisRemarks',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Analysis Remark'
     },
     user?.role == "SAD" ?
     {

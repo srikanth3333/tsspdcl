@@ -18,9 +18,6 @@ const Chart = ({id,name,filterId}) => {
       width:'100%',
     });
 
-    console.log()
-    
-
     useEffect(() => {
         const filterSelect =  document.querySelector(`.ids`)
         filterSelect.addEventListener('change', async (e) => {
