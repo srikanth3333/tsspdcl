@@ -6,7 +6,7 @@ import Wrapper from "../components/Wrapper";
 import store from '../redux/store';
 import {Provider} from 'react-redux';
 import 'devextreme/dist/css/dx.light.css';
-
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 
 function MyApp({ Component, pageProps }) {
 

@@ -10,7 +10,7 @@ import inputDataReducer from "./inputData/inputDataSlice";
 import analysisGraphReducer from "./analysisRemarks/analysisGraph";
 import analysisExceptionReducer from "./analysisRemarks/analysisException";
 import analysisSummaryReducer from "./analysisRemarks/analysisSummary";
-
+import meterReadingsReducer from "./meterReadings/meterReadingsSlice"
 
 export default configureStore({
 	reducer: {
@@ -24,6 +24,7 @@ export default configureStore({
 		inputData:inputDataReducer,
 		analysisGraph:analysisGraphReducer,
 		analysisException:analysisExceptionReducer,
-		analysisSummary:analysisSummaryReducer
+		analysisSummary:analysisSummaryReducer,
+		meterData:meterReadingsReducer 
 	},
 });

@@ -5,7 +5,9 @@ import {getBoardName} from "../../utils/getBoard";
 export const getAnalysisSummary = createAsyncThunk('remark/getAnalysisSummary', 
 	async (payload, {getState}) => {
         let code = getBoardName()
-        return await axios.get(`https://mr.bharatsmr.com/dashboard/readingsummary?mobileNo=${payload.mobileNo}&boardCode=${code}&page=${payload.page}`, {
+        return await axios.get(`https://mr.bharatsmr.com/dashboard/readingsummary?mobileNo=${payload.mobileNo}&boardCode=${code}&page=${payload.page}
+                                &startDate=${payload.startDate}&endDate=${payload.endDate}
+                                &exception=${payload.exception}`, {
             headers: {
                 authkey:localStorage.getItem('mobileNo'),
                 'Content-Type': 'application/json'

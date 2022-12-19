@@ -13,9 +13,11 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
 
   let dispatch = useDispatch();
   
-  const onChangeHandler = (val,lop) => {
+  const onChangeHandler = (val,lop,getKeys) => {
+    if(getKeys == true) {
+        return
+    }
     setObjArr({...objArr, [lop]:val})
-    
   }
 
   const onSubmit = () => {
@@ -89,7 +91,9 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
                                             value={objArr && objArr[item.value]}
                                             style={{ width: '100%' }}
                                             notFoundContent={selectLoading ? <Spin size="small" /> : null}
-                                            onChange={(val) => onChangeHandler(val,item.value)}
+                                            onChange={(val) => {
+                                                onChangeHandler(val,item.value)
+                                            }}
                                             >
                                             {
                                                 selectLoading ?

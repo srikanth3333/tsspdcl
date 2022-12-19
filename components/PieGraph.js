@@ -16,12 +16,14 @@ const PieGraph = ({data,link}) => {
     const router = useRouter()
     
     function customizeText(arg) {
-        return `${arg.argument} (${arg.value})`;
+      
+        return `${arg.argument} (${arg.percentText})`;
+        // return `${arg.argument}`;
     }
 
     const onPointClick = ({ target: point }) => {
         point.select();
-        console.log(point.data)
+        
         router.push(`${link}/${point.data.analysisRemark}`);        
       }
   
@@ -31,6 +33,7 @@ const PieGraph = ({data,link}) => {
         dataSource={data}
         palette="Bright"
         title="Analysis Remark"
+        type="doughnut"
         // onPointClick={pointClickHandler}
         // onLegendClick={legendClickHandler}
         onPointClick={onPointClick}

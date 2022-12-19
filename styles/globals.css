@@ -146,3 +146,12 @@ p {
 .font-lg {
   font-size: 22px !important;
 }
+
+.iiz__img {
+  height: 400px !important;
+  object-fit: contain !important;
+}
+
+.iiz__img {
+  height: 500px !important;
+}

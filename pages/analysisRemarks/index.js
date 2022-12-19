@@ -4,6 +4,7 @@ import {getAnalysisRemark} from "../../redux/analysisRemarks/analysisGraph";
 import Link from 'next/link';
 import Head from 'next/head';
 import PieGraph from "../../components/PieGraph";
+import FilterCard from '../../components/FilterCard';
 
 const Index = () => {
 
@@ -11,13 +12,13 @@ const Index = () => {
     
     let dispatch = useDispatch()
 
-    let apiObject = {}
+    let apiObject = {startDate:'',endDate:'',}
 
     useEffect(() => {
       dispatch(getAnalysisRemark(apiObject))
     }, [dispatch])
 
-    console.log(data)
+    
     
     return (
           <div>
@@ -27,10 +28,19 @@ const Index = () => {
             </Head>
             <div className="count-card">
               <div className="card mt-3">
-                <div className="card-body text-center">
-                    <PieGraph data={data.data} link="/analysisRemarks/exception"  
-                        
+                <div className="card-body">
+                    <FilterCard 
+                      objectData={apiObject}
+                      paginateApi={getAnalysisRemark}
+                      download={true}
+                      dataDownload={data.data}
+                      data={[
+                        {label:"Start Date",type:"date",value:"startDate"},
+                        {label:"End Date",type:"date",value:"endDate"},
+                      ]} 
+                      title=""
                     />
+                    <PieGraph data={data.data} link="/analysisRemarks/exception"  />
                 </div>
               </div>
             </div>

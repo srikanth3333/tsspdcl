@@ -67,7 +67,12 @@ const Wrapper = ({children}) => {
       {
         href: '/analysisRemarks',
         icon: (<MenuFoldOutlined fontSize="small" />),
-        label: 'Analysis Remark'
+        label: 'Photo Analysis'
+      },
+      {
+        href: '/meterReadings',
+        icon: (<MenuFoldOutlined fontSize="small" />),
+        label: 'View Meter Readings'
       },
       
       user?.role == "SAD" ?
@@ -97,7 +102,7 @@ const Wrapper = ({children}) => {
     {
       href: '/inputData',
       icon: (<MenuFoldOutlined fontSize="small" />),
-      label: 'Input Data'
+      label: 'Unbilled Data'
     },
     {
       href: '/graphs',
@@ -105,10 +110,15 @@ const Wrapper = ({children}) => {
       label: 'Graphs'
     },
     {
-      href: '/analysisRemarks',
+      href: '/meterReadings',
       icon: (<MenuFoldOutlined fontSize="small" />),
-      label: 'Analysis Remark'
+      label: 'View Meter Readings'
     },
+    // {
+    //   href: '/analysisRemarks',
+    //   icon: (<MenuFoldOutlined fontSize="small" />),
+    //   label: 'Analysis Remark'
+    // },
     user?.role == "SAD" ?
     {
       href: '/addUser',

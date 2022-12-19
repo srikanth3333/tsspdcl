@@ -9,6 +9,8 @@ import {addFilters} from "../redux/auth/userSlice";
 import Link from 'next/link'
 import { isDate } from "moment/moment";
 import {billDelete} from "../redux/billDelete/billDeleteSlice";
+import InnerImageZoom from 'react-inner-image-zoom';
+import { Modal, Button } from 'react-bootstrap';
 const Str = require('@supercharge/strings')
 var momentTimezone = require('moment-timezone');
 
@@ -19,6 +21,10 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
   let filtersData = useSelector((state) => state.users)
   let dispatch = useDispatch()
   const [page,setPage] = useState(1)
+  const [show, setShow] = useState(false);
+  const [zoomImage, setZoomImage] = useState(null);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   React.useEffect(() => {
     dispatch(addFilters({data:apiObject}))
@@ -120,9 +126,10 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
             )
           }
        }
-      }else if(item.name == "mobileNo") {
+      }else if(item.name == "mobileNo" && item.extraData == true) {
+        
         return {
-          title: `Mobile No`,
+          title: `Consumer Details`,
           dataIndex: `${item.name}`,
           key: i,
           width: 180,
@@ -134,7 +141,18 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           render: (val,record) => {
             return(
               <>
-                <Link href={`${item.linkPage}/${val}`}>{val}</Link>
+                {!item.linkPage ? val : <Link href={`${item.linkPage}/${val}/file/${val}`}>{val}</Link>}
+                {
+                  item.extraData == true ?
+                  <>
+                    <p>Uid No: {record.uidNo}</p>
+                    <p>Serial No:{record.serialNo}</p>
+                    <p>Reading Status: {record.readingStatus}</p>
+                    <p>Duration: {record.totalDuration}</p>
+                    <p>Bill Date: {record.billDate}</p>
+                  </> : null
+                }
+                
               </>
             )
           }
@@ -144,52 +162,47 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           title: `Readings`,
           dataIndex: `${item.name}`,
           key: i,
-          width: 180,
+          width: 500,
           textWrap: 'word-break',
           ellipsis: true,
           sorter: (a, b) => {
             return a[item.name] - b[item.name]
           },
-          render: (val,record) => {
+          render: (val,record,index) => {
             return(
-              <>
+              <div className="d-flex  align-items-center">
                 {val != null ?
                     Object.entries(val).map(([key, value]) => {
                         return (
                             <>
-                            {
-                                <div className="text-center">
-                                    <img style={{cursor: 'pointer'}}
-                                    // onClick={() => {
-                                    //     setZoomImage(value.bigImg)
-                                    //     handleShow()
-                                    // }}
-                                    src={value.smallImg} height="70px"></img>
-                                    <p className="mt-2"><b>Value: {value.actualValue ? value.actualValue : value.scanValue} </b></p>
-                                    <p className="mt-2"><b>Serial Number: {value?.insights && value.insights?.p_serial ? value.insights?.p_serial : value?.insights?.p_serial} </b></p>
-                                    <p><b>{key}</b></p>
-                                    <p><b>{value.analysisRemark}</b></p>
-                                </div>
-                            }
+                              {
+                                  <div className="text-center me-4">
+                                      <img style={{cursor: 'pointer'}}
+                                      onClick={() => {
+                                          setZoomImage(value.bigImg)
+                                          handleShow()
+                                      }}
+                                      src={value.smallImg} height="90px"></img>
+                                      <p className="mt-2"><b>Value: {value.actualValue ? value.actualValue : value.scanValue} </b></p>
+                                      {/* <p className="mt-2"><b>Serial Number: {value?.insights && value.insights?.p_serial ? value.insights?.p_serial : value?.insights?.p_serial} </b></p> */}
+                                      <p><b>{key}</b></p>
+                                      <p><b>{value.analysisRemark}</b></p>
+                                  </div>
+                              }
                               
                             </>
                         )
                     })
                 :
-                    <img src={getImg}
-                    style={{cursor: 'pointer'}}
-                    onClick={() => {
-                        // setZoomImage(getImg)
-                        // handleShow()
-                    }}
-
-                    height="70px" />
+                   null
                 }
-              </>
+              </div>
             )
           }
        }
-      }else if(item.name == "timestamp") {
+      }
+      
+      else if(item.name == "timestamp") {
         return {
           title: `last Updated`,
           dataIndex: `${item.name}`,
@@ -201,11 +214,48 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
             return a[item.name] - b[item.name]
           },
           render: (val,record) => {
+            let string = val * 1 + 19800;
             
             return(
               <>
-                <Moment format="DD/MM/YYYY">{val}</Moment> <br />
-                <Moment format="hh:mm:ss A">{val}</Moment>
+                {
+                  item.convert == true ?
+                    <>
+                      {moment.unix(val).format("DD/MM/YYYY")} <br />
+                      {moment.unix(string.toString()).utc().format("hh:mm:ss A")}
+                    </>
+                  :
+                  <>
+                    <Moment format="DD/MM/YYYY">{val}</Moment> <br />
+                    <Moment format="hh:mm:ss A">{val}</Moment>
+                  </>
+                }
+                
+              </>
+            )
+          }
+       }
+      }else if(item.name == "smallImg") {
+        return {
+          title: `Small Img`,
+          dataIndex: `${item.name}`,
+          key: i,
+          width: 180,
+          textWrap: 'word-break',
+          ellipsis: true,
+          sorter: (a, b) => {
+            return a[item.name] - b[item.name]
+          },
+          render: (val,record,index) => {
+            let getImg = data[index].bigImg
+            return(
+              <>
+                <img style={{cursor: 'pointer'}}
+                    onClick={() => {
+                        setZoomImage(getImg)
+                        handleShow()
+                    }}
+                    src={val} height="90px"></img>
               </>
             )
           }
@@ -218,26 +268,17 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
           dataIndex: `${item.name}`,
           key: i,
           width: 180,
-          textWrap: 'word-break',
+          textWrap: 'break-word',
           ellipsis: true,
           sorter: (a, b) => {
             return a[item.name] - b[item.name]
           },
           render: (val,record) => {
-            let ids = linkIndex && linkIndex.map((ddr) => ddr.index)
-            let final = linkIndex && linkIndex.reduce((acc,ddr) => {
-              return {...acc, [ddr.index]:{index:ddr.index,link:ddr.linkUrl,
-                linkExtend:ddr.linkExtend,noLink:ddr.noLink}}
-            },{})
             
             return(
               <>
                 {
-                        link == true && ids.includes(i) ?
-                          <Link href={final[i]?.linkExtend == true ? `/${final[i]?.link}${record.id}` : final[i]?.noLink == true ? `${final[i]?.link}` : `${val}`}>
-                                {val}
-                          </Link>
-                         : val
+                  !item.linkPage ? val : <Link href={`${item.linkPage}/${record.mobileNo}/file/${item.name}`}>{val}</Link>
                 }
               </>
             )
@@ -246,7 +287,7 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
     })
 
   deleteOption ==  true ? lp?.push({
-    title: `Delete`,
+    title: ``,
     dataIndex: `Delete`,
     key: 10,
     width: 180,
@@ -264,7 +305,6 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
   }) : null
 
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log(sorter.field);
     return extra.currentDataSource.sort();
   };
 
@@ -287,13 +327,34 @@ function TableData({data,paginateApi,apiObject,paginate,link,linkIndex,excludeIt
                 pagination={paginate == true ? {
                   pageSize: 20,
                   current: page, 
-                  total: page * 20 + data.length,
+                  total: data.length == 20  ? page * 20 + data.length : 1,
                   onChange: (page) => {
                     setPage(page)
                     dispatch(paginateApi({...filtersData.filterObject,page:page - 1}))
                   },
                 } : {showSizeChanger:true,pageSize:20}}
               />
+              <Modal
+                show={show} onHide={handleClose}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                className="mt-4"
+                >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Image View
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="p-1">
+                    <div className="text-center">
+                        <InnerImageZoom src={zoomImage} className="zoom-img-main" style={{height: '800px',objectFit: 'contain'}} zoomSrc={zoomImage} />
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={handleClose}>Close</Button>
+                </Modal.Footer>
+            </Modal>
           </div>
         </div>
     </>
