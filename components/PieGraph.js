@@ -49,7 +49,7 @@ const PieGraph = ({data,link}) => {
         </Series>
 
         <Size width={'100%'} height={500} />
-        <Export enabled={true} />
+        {/* <Export enabled={true} /> */}
       </PieChart>
     );
 }

@@ -51,7 +51,7 @@ const Index = () => {
                       paginate={false}
                       arrayData={[
                         {name:'mobileNo',label:"Mobile Number"},
-                        {name:'name',label:"Name"},
+                        // {name:'name',label:"Name"},
                         {name:'timestamp',label:"Last Updated"},
                         {name:'bl',label:"Battery Percentage"},
                         {name:'pendingCount',label:"Pending Sync"},
