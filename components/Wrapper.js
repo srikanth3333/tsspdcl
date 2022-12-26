@@ -64,24 +64,28 @@ const Wrapper = ({children}) => {
         icon: (<MenuFoldOutlined fontSize="small" />),
         label: 'Unbilled Data'
       },
-      {
-        href: '/analysisRemarks',
-        icon: (<MenuFoldOutlined fontSize="small" />),
-        label: 'Photo Analysis'
-      },
+      
       {
         href: '/meterReadings',
         icon: (<MenuFoldOutlined fontSize="small" />),
         label: 'View Meter Readings'
       },
       
-      user?.role == "SAD" ?
-      {
-        href: '/addUser',
-        icon: (<MenuFoldOutlined fontSize="small" />),
-        label: 'Add User'
-      } : null
+      
   ]
+
+  
+  user?.role == "SAD" ?
+    items.push({
+      href: '/addUser',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Add User'
+    },{
+      href: '/analysisRemarks',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Photo Analysis'
+    },)
+  : null
 
   let otherItems = [{
       href: '/',
@@ -119,13 +123,20 @@ const Wrapper = ({children}) => {
     //   icon: (<MenuFoldOutlined fontSize="small" />),
     //   label: 'Analysis Remark'
     // },
-    user?.role == "SAD" ?
-    {
+
+  ];
+
+  user?.role == "SAD" ?
+    otherItems.push({
       href: '/addUser',
       icon: (<MenuFoldOutlined fontSize="small" />),
       label: 'Add User'
-    } : null
-  ];
+    },{
+      href: '/analysisRemarks',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'Photo Analysis'
+    },)
+  : null
 
     const defaultOptions = {
       loop: true,
