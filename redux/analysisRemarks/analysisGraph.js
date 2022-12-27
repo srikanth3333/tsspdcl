@@ -25,10 +25,12 @@ export const getAnalysisRemark = createAsyncThunk('remark/getAnalysisRemark',
                 } if (key == 'II' ) {
                 
                     graphData.push({"analysisRemark": "Invalid Image", "val": value})
-                } if (key == 'MM' ) {
+                } 
+                // if (key == 'MM' ) {
                 
-                    graphData.push({"analysisRemark": "Meter Mismatch", "val": value})
-                } if (key == 'PU' ) {
+                //     graphData.push({"analysisRemark": "Meter Mismatch", "val": value})
+                // } 
+                if (key == 'PU' ) {
                 
                     graphData.push({"analysisRemark": "Parameter is unclear", "val": value})
                 } if (key == 'SP' ) {
