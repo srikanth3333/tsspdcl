@@ -10,7 +10,9 @@ import inputDataReducer from "./inputData/inputDataSlice";
 import analysisGraphReducer from "./analysisRemarks/analysisGraph";
 import analysisExceptionReducer from "./analysisRemarks/analysisException";
 import analysisSummaryReducer from "./analysisRemarks/analysisSummary";
-import meterReadingsReducer from "./meterReadings/meterReadingsSlice"
+import meterReadingsReducer from "./meterReadings/meterReadingsSlice";
+import tsnBilledReducer from "./tsnBilled/tsnBilledSlice";
+import tsnDataSlice from "./tsnBilled/tsnDataSlice";
 
 export default configureStore({
 	reducer: {
@@ -25,6 +27,8 @@ export default configureStore({
 		analysisGraph:analysisGraphReducer,
 		analysisException:analysisExceptionReducer,
 		analysisSummary:analysisSummaryReducer,
-		meterData:meterReadingsReducer 
+		meterData:meterReadingsReducer,
+		tsnBilled:tsnBilledReducer,
+		tsnData:tsnDataSlice
 	},
 });

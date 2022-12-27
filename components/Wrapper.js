@@ -118,6 +118,16 @@ const Wrapper = ({children}) => {
       icon: (<MenuFoldOutlined fontSize="small" />),
       label: 'View Meter Readings'
     },
+    {
+      href: '/tsnBilled',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'TSNPDCL Billed'
+    },
+    {
+      href: '/tsnData',
+      icon: (<MenuFoldOutlined fontSize="small" />),
+      label: 'TSNPDCL Data Billed'
+    },
     // {
     //   href: '/analysisRemarks',
     //   icon: (<MenuFoldOutlined fontSize="small" />),
@@ -135,7 +145,9 @@ const Wrapper = ({children}) => {
       href: '/analysisRemarks',
       icon: (<MenuFoldOutlined fontSize="small" />),
       label: 'Photo Analysis'
-    },)
+    },
+    
+    )
   : null
 
     const defaultOptions = {
