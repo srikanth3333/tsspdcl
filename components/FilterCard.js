@@ -14,6 +14,7 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
   let dispatch = useDispatch();
   
   const onChangeHandler = (val,lop,getKeys) => {
+    console.log(val,lop)
     if(getKeys == true) {
         return
     }

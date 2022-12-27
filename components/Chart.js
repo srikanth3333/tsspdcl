@@ -6,6 +6,7 @@ import Head from 'next/head';
 const Chart = ({id,name,filterId}) => {
     
     let user = useSelector((state) => state.users)
+    // const [defaultEroId, setDefaultEroId] = useState(user?.logData?.eroList?.[0])
     const [eroId, setEroId] = useState(user?.logData?.eroList?.[0])
 
     const sdk = new ChartsEmbedSDK({
@@ -27,12 +28,12 @@ const Chart = ({id,name,filterId}) => {
                 }else {
                     chart.setFilter({"spoterocd": ""})
                 }
-              
             }else {
               chart.setFilter({ "spoterocd": filterSelect.value })
             }
         })
         chart.render(document.querySelector(`.${name}`))
+        
         return () => {}
     }, [])
 
@@ -46,7 +47,7 @@ const Chart = ({id,name,filterId}) => {
                         <input type="text" className="test d-none " />
                         <label htmlFor="">Ero List</label>
                         <select name="" onChange={(e) => setEroId(e.target.value)} id="" className={`ids form-select mb-3`}>
-                            <option value={""}>{"No Select"}</option>
+                            <option value="">{"No Select"}</option>
                             {user?.logData?.eroList?.map((item,i) => (
                                 <option value={item} key={i}>{item}</option>
                             ))}

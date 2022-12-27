@@ -49,7 +49,7 @@ const Index = () => {
                       apiObject={apiObject}
                       arrayData={[
                         {name:'mobileNo',label:"Meter Reader"},
-                        {name:'uidNo',label:"Consumer No"},
+                        {name:'uidNo',label:"Usc No"},
                         {name:'readingType',label:"Reading Type"},
                         {name:'valueType',label:"Parameter"},
                         {name:'finalValue',label:"Value"},

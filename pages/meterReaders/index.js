@@ -22,6 +22,7 @@ const Index = () => {
 
     
 
+
     
   return (
           <div>
@@ -36,7 +37,7 @@ const Index = () => {
                       objectData={apiObject}
                       paginateApi={getBilledCount}
                       download={false}
-                      dataDownload={data.data.data}
+                      dataDownload={data.meterReaderData}
                       data={[
                         {label:"ERO Code",type:"text",value:"eroCode"},
                       ]} 
