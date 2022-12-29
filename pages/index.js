@@ -23,6 +23,17 @@ const Index = () => {
     }, [dispatch])  
 
   const count = data?.data?.reduce((acc,d) => d.billCount + acc,0)
+
+  const filteredDates = data.data?.reduce((acc,d,index) => {
+    const item = d.billDate?.toString();
+    let data = item != undefined ? item.split('/') : null;
+    if(!data) {
+      console.log(data)
+    }else {
+      return {...acc, [index]: {"eroCode":d.eroCode,"billDate":`${data[2]}-${data[1]}-${data[0]}`,"meterReader":d.meterReader,
+              billCount:d.billCount}};
+    }
+  },{})
     
   return (
           <div>
@@ -63,6 +74,20 @@ const Index = () => {
                         {name:'billDate',label:"Bill Date"},
                         {name:'meterReader',label:"Meter Reader"},
                         {name:'billCount',label:"Bill Count"},
+                      ]}
+                    />
+
+                    <TableData 
+                      data={data.meterReaderData} 
+                      link={false}
+                      loading={data}
+                      filters={{}}
+                      paginate={false}
+                      arrayData={[
+                        {name:'mobileNo',label:"Mobile No"},
+                        {name:'timestamp',label:"Date", date:true},
+                        {name:'bl',label:"Bl"},
+                        {name:'pendingCount',label:"Pending Count"},
                       ]}
                     />
                 </div>

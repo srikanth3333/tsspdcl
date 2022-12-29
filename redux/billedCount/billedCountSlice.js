@@ -12,8 +12,6 @@ export const getBilledCount = createAsyncThunk('billed/getConsumerArrears',
             }
         })
         .then(res => {
-            console.log('resp...')
-            console.log(res)
             return{data:res.data.billCounts,meterReaderData:res.data.meterReaderData}
         })
         .catch(err => {

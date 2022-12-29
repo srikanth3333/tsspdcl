@@ -141,7 +141,8 @@ const Wrapper = ({children}) => {
       href: '/addUser',
       icon: (<MenuFoldOutlined fontSize="small" />),
       label: 'Add User'
-    },{
+    },
+    {
       href: '/analysisRemarks',
       icon: (<MenuFoldOutlined fontSize="small" />),
       label: 'Photo Analysis'
@@ -243,11 +244,14 @@ const Wrapper = ({children}) => {
             }}
           >
             <div className="d-flex align-items-center justify-content-between mt-0">
-                {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                  className: 'trigger',
-                  onClick: () => setCollapsed(!collapsed),
-                })}
-                <div>
+                <div className="d-flex align-items-center">
+                  {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                    className: 'trigger',
+                    onClick: () => setCollapsed(!collapsed),
+                  })}
+                  <p className='ms-3'>{localStorage.getItem('mobileNo')}</p>
+                </div>
+                <div className='d-flex'>
                   <button 
                     className="btn btn-danger btn-sm me-3"
                     onClick={() => {

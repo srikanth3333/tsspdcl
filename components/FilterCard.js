@@ -55,6 +55,7 @@ function FilterCard({title,objectData,paginateApi,data,finalCount,
                                            allowClear
                                            value={objArr && objArr[item.value]}
                                            onChange={(val) => onChangeHandler(val.target.value,item.value)} 
+                                           disabled={item.disabled == true ? true : false}
                                     />
                                 </div>
                             </>

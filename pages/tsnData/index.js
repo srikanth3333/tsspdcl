@@ -13,7 +13,9 @@ const Index = () => {
     
     let dispatch = useDispatch()
 
-    let apiObject = {eroList:"",sectionList:"",prsStatus:'',prvStatus:'',mobileNo:''}
+    let dataEro = user.logData?.eroList?.toString();
+
+    let apiObject = {eroList:dataEro,sectionList:"",prsStatus:'',prvStatus:'',mobileNo:''}
 
     useEffect(() => {
       dispatch(getTsnBilledData(apiObject))
@@ -37,7 +39,7 @@ const Index = () => {
                       data={[
                         {label:"Ero List",type:"text",value:"eroList"},
                         {label:"Section List",type:"text",value:"sectionList"},
-                        {label:"PRS Status List",type:"text",value:"prvStatus"},
+                        {label:"PRS Status List",type:"text",value:"prsStatus"},
                         {label:"PRV Status List",type:"text",value:"prvStatus"},
                         {label:"Mobile Number",type:"text",value:"mobileNo"},
                       ]} 

@@ -9,11 +9,13 @@ import FilterCard from "../../components/FilterCard";
 const Index = () => {
 
     let data = useSelector((state) => state.tsnBilled)
-    const user = useSelector((state) => state.users) 
+    const user = useSelector((state) => state.users);
+
+    let dataEro = user.logData?.eroList?.toString()
     
     let dispatch = useDispatch()
 
-    let apiObject = {eroList:"",sectionList:"",prsStatus:'',prvStatus:'',mobileNo:'',groupBy:'section'}
+    let apiObject = {eroList:dataEro,sectionList:"",prsStatus:'',prvStatus:'',mobileNo:'',groupBy:'section'}
 
     useEffect(() => {
       dispatch(getTsnBilled(apiObject))
@@ -35,12 +37,13 @@ const Index = () => {
                       download={false}
                       dataDownload={data.data}
                       data={[
-                        {label:"Ero List",type:"text",value:"eroList"},
+                        {label:"Ero List",type:"text",value:"eroList", disabled:true},
                         {label:"Section List",type:"text",value:"sectionList"},
-                        {label:"PRS Status List",type:"text",value:"prvStatus"},
+                        {label:"PRS Status List",type:"text",value:"prsStatus"},
                         {label:"PRV Status List",type:"text",value:"prvStatus"},
                         {label:"Mobile Number",type:"text",value:"mobileNo"},
-                        {label:"Group By",type:"select",filterList:['section','ero'],value:"groupBy",getKeys:true}
+                        {label:"Group By",type:"select",filterList:['section','ero','mobileNo'],
+                         value:"groupBy",getKeys:true}
                       ]} 
                       title="TSNPDCL Billed"
                     />
