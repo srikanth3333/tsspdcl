@@ -77,7 +77,7 @@ const Index = () => {
                       ]}
                     />
 
-                    <TableData 
+                    {/* <TableData 
                       data={data.meterReaderData} 
                       link={false}
                       loading={data}
@@ -89,7 +89,7 @@ const Index = () => {
                         {name:'bl',label:"Bl"},
                         {name:'pendingCount',label:"Pending Count"},
                       ]}
-                    />
+                    /> */}
                 </div>
               </div>
             </div>
