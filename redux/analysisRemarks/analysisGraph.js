@@ -40,6 +40,10 @@ export const getAnalysisRemark = createAsyncThunk('remark/getAnalysisRemark',
                 
                     graphData.push({"analysisRemark": "Unclear Image", "val": value})
                 }
+                if (key == 'OK' ) {
+                
+                    graphData.push({"analysisRemark": "OK", "val": value})
+                }
                 
             }
             
