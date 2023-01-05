@@ -26,6 +26,8 @@ const Wrapper = ({children}) => {
     const [collapsed, setCollapsed] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [code,setCode] = useState('')
+    const [targetReached, setTargetReached] = React.useState(false)
+    const [activeSidebar, setActiveSidebar] = React.useState(true)
     
 
     let items = [
@@ -166,6 +168,25 @@ const Wrapper = ({children}) => {
       dispatch(tokenLogin())
       setCode(getBoardName())
     },[dispatch])
+
+    const updateTarget = React.useCallback((e) => {
+      if (e.matches) {
+        setTargetReached(true)
+        setCollapsed(true)
+      }else {
+        setActiveSidebar(true)
+        setTargetReached(false)
+        setCollapsed(false)
+      }
+    }, [])
+
+    useEffect(() =>
+    {
+      const media = window.matchMedia(`(max-width: ${"1228"}px)`)
+      media.addEventListener('change', updateTarget)
+      if (media.matches) setTargetReached(true)
+      return () => media.removeEventListener('change', updateTarget)
+    }, [])
 
     if(user.loading == true) {
       return (
